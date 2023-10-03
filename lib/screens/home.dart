@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spark_pet/components/home/circular_progress.dart';
 
 import '../components/home/progress_bar.dart';
 
@@ -21,11 +22,33 @@ class _HomeState extends State<HomeScreen> {
         child: Column(
           children: [
             const SizedBox(height: 20),
-            const Text('124'),
-            const SizedBox(height: 40),
-            const ProgressBar(),
+            const Text(
+              '124',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 20),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget> [
+                Expanded(child: ProgressBar(
+                  progressBarColor: Color(0xffe1ab3c),
+                  title: "Level 5",
+                  currentProgress: 5,
+                  progressTotal: 10,
+                )),
+                SizedBox(width: 10),
+                Expanded(child: ProgressBar(
+                  progressBarColor: Color(0xffe82c40),
+                  title: "HP",
+                  currentProgress: 72,
+                  progressTotal: 100,
+                )),
+              ],
+            ),
             const SizedBox(height: 6),
-            const ProgressBar(),
             const Expanded(
               child: Stack(
                 alignment: Alignment.bottomCenter,
@@ -53,35 +76,26 @@ class _HomeState extends State<HomeScreen> {
             const Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget> [
-                SizedBox(
-                  width: 80,
-                  height: 80,
-                  child: CircularProgressIndicator(
-                    value: 0.88,
-                    strokeWidth: 10,
-                    backgroundColor: Color(0xffdddddd),
-                    valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
-                  ),
+                CircularProgress(
+                  progressBarColor: Color(0xff1d8eec),
+                  title: "Steps",
+                  currentProgress: 1293.0,
+                  goal: 2000.0,
+                  round: true,
                 ),
-                SizedBox(
-                  width: 80,
-                  height: 80,
-                  child: CircularProgressIndicator(
-                    value: 0.72,
-                    strokeWidth: 10,
-                    backgroundColor: Color(0xffdddddd),
-                    valueColor: AlwaysStoppedAnimation<Color>(Color(0xffe8b100)),
-                  ),
+                CircularProgress(
+                  progressBarColor: Color(0xfffdc50f),
+                  title: "Calories",
+                  currentProgress: 301.0,
+                  goal: 500.0,
+                  round: true,
                 ),
-                SizedBox(
-                  width: 80,
-                  height: 80,
-                  child: CircularProgressIndicator(
-                    value: 0.7,
-                    strokeWidth: 10,
-                    backgroundColor: Color(0xffdddddd),
-                    valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
-                  ),
+                CircularProgress(
+                  progressBarColor: Color(0xff0c8c31),
+                  title: "Distance",
+                  currentProgress: 2.1,
+                  goal: 4.0,
+                  round: false,
                 ),
               ],
             ),
@@ -92,12 +106,12 @@ class _HomeState extends State<HomeScreen> {
                 width: 200,
                 height: 50,
                 decoration: BoxDecoration(
-                  color: Colors.blue,
+                  color: Colors.green,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: const Center(
                   child: Text(
-                    'Feed',
+                    'FILL BOWL',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 20,
