@@ -1,8 +1,8 @@
-import 'package:SparkPet/screens/challenges.dart';
-import 'package:SparkPet/screens/closet_store.dart';
-import 'package:SparkPet/screens/exercise_history.dart';
-import 'package:SparkPet/screens/home.dart';
-import 'package:SparkPet/screens/leaderboard.dart';
+import 'package:spark_pet/screens/challenges.dart';
+import 'package:spark_pet/screens/closet_store.dart';
+import 'package:spark_pet/screens/exercise_history.dart';
+import 'package:spark_pet/screens/home.dart';
+import 'package:spark_pet/screens/leaderboard.dart';
 import 'package:flutter/material.dart';
 
 import 'components/spark_pet_nav_bar.dart';

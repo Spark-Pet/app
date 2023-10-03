@@ -1,4 +1,4 @@
-import 'package:SparkPet/sparkpet.dart';
+import 'package:spark_pet/sparkpet.dart';
 import 'package:flutter/material.dart';
 
 void main() {

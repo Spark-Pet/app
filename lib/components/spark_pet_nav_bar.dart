@@ -3,7 +3,7 @@ import '../icons/spark_icons.dart';
 
 class NavBarButton extends StatelessWidget {
   /// A button for the navigation bar (below)
-  NavBarButton({
+  const NavBarButton({
     super.key,
     required this.icon,
     required this.size,
@@ -22,10 +22,10 @@ class NavBarButton extends StatelessWidget {
   final int thisPageIndex;
   final Function onPressed;
 
-  double topPadding;
-  double bottomPadding;
-  double leftPadding;
-  double rightPadding;
+  final double topPadding;
+  final double bottomPadding;
+  final double leftPadding;
+  final double rightPadding;
 
   @override
   Widget build(BuildContext context) {
