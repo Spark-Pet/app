@@ -14,15 +14,22 @@ class _ClosetState extends State<ClosetScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: const Center(
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
+            Container(
+              height: 200,
+              width: 200,
+              decoration: BoxDecoration(
+                border: Border.all(
+                  width: 2,
+                  color: Color(0xffdddddd),
+                ),
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+              ),
+            ),
+            const Text(
               'Closet/Store Screen',
             ),
           ],

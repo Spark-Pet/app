@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spark_pet/components/home/circular_progress.dart';
+import 'package:spark_pet/icons/bone_icon.dart';
 
 import '../components/home/progress_bar.dart';
 
@@ -22,12 +23,39 @@ class _HomeState extends State<HomeScreen> {
         child: Column(
           children: [
             const SizedBox(height: 20),
-            const Text(
-              '124',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Container(
+                      width: 80,
+                      height: 35,
+                      decoration: BoxDecoration(
+                        color: Colors.grey,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                    const Row(
+                      children: [
+                        Text(
+                          '124',
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.white,
+                          ),
+                        ),
+                        Icon(
+                          BoneIcon.bone,
+                          size: 20,
+                          color: Colors.white,
+                        ),
+                      ]
+                    )
+                  ]
+                )
+              ]
             ),
             const SizedBox(height: 20),
             const Row(

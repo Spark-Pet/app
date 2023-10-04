@@ -86,3 +86,6 @@ flutter:
     - family: SparkIcons
       fonts:
         - asset: lib/icons/SparkIcons.ttf
+    - family: BoneIcon
+      fonts:
+        - asset: lib/icons/Bone.ttf

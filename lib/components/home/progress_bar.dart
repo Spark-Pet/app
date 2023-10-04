@@ -26,18 +26,16 @@ class ProgressBar extends StatelessWidget {
                 borderRadius: const BorderRadius.all(Radius.circular(10)),
               ),
             ),
-            Expanded(
-              child: FractionallySizedBox(
-                widthFactor: currentProgress / progressTotal,
-                child: Container(
-                  height: 20,
-                  decoration: BoxDecoration(
-                    color: progressBarColor,
-                    borderRadius: const BorderRadius.all(Radius.circular(10)),
-                  ),
+            FractionallySizedBox(
+              widthFactor: currentProgress / progressTotal,
+              child: Container(
+                height: 20,
+                decoration: BoxDecoration(
+                  color: progressBarColor,
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
                 ),
               ),
-            )
+            ),
           ],
         ),
         Text(
