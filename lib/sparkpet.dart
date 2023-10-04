@@ -33,14 +33,19 @@ class _SparkPetState extends State<SparkPet> {
         useMaterial3: true,
       ),
       home: Scaffold(
-        bottomNavigationBar: SparkPetNavBar(currentPageIndex: currentPageIndex, notifyParent: refreshState),
-        body: <Widget>[
-          const HistoryScreen(),
-          const ClosetScreen(),
-          const HomeScreen(),
-          const LeaderboardScreen(),
-          const ChallengesScreen(),
-        ][currentPageIndex],
+        body: Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
+            <Widget>[
+              const HistoryScreen(),
+              const ClosetScreen(),
+              const HomeScreen(),
+              const LeaderboardScreen(),
+              const ChallengesScreen(),
+            ][currentPageIndex],
+            SparkPetNavBar(currentPageIndex: currentPageIndex, notifyParent: refreshState),
+          ],
+        ),
       ),
     );
   }
