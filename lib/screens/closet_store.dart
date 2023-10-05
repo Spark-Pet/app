@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spark_pet/components/closet/closet_switch.dart';
 
 class ClosetScreen extends StatefulWidget {
   const ClosetScreen({super.key});
@@ -16,24 +17,12 @@ class _ClosetState extends State<ClosetScreen> {
     return Scaffold(
       body: Center(
         child:  Padding(
-          padding: const EdgeInsets.all(26),
+          padding: const EdgeInsets.only(left: 26, right: 26, top: 40),
           child: Column(
             children: [
-              Container(
-                height: 50,
-                decoration: BoxDecoration(
-                  color: Colors.grey[300],
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: const Center(
-                  child: Text(
-                    'Closet',
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
+              const Padding(
+                padding: EdgeInsets.only(left: 20, right: 20),
+                child: ClosetSwitchButton(),
               ),
               Expanded(
                 child: GridView.builder(
@@ -75,23 +64,23 @@ class _ClosetState extends State<ClosetScreen> {
                           ),
                         ),
                         TextButton(
-                            onPressed: () {},
-                            child: Container(
-                              height: 40,
-                              decoration: BoxDecoration(
-                                color: Colors.green,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: const Center(
-                                child: Text(
-                                  'EQUIP',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                  ),
+                          onPressed: () {},
+                          child: Container(
+                            height: 40,
+                            decoration: BoxDecoration(
+                              color: Colors.green,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: const Center(
+                              child: Text(
+                                'EQUIP',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
                                 ),
                               ),
-                            )
+                            ),
+                          ),
                         ),
                       ],
                     );
