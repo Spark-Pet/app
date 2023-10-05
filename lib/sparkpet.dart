@@ -38,12 +38,15 @@ class _SparkPetState extends State<SparkPet> {
           children: [
             <Widget>[
               const HistoryScreen(),
-              const ClosetScreen(),
+              const ClosetStoreScreen(),
               const HomeScreen(),
               const LeaderboardScreen(),
               const ChallengesScreen(),
             ][currentPageIndex],
-            SparkPetNavBar(currentPageIndex: currentPageIndex, notifyParent: refreshState),
+            SparkPetNavBar(
+              currentPageIndex: currentPageIndex,
+              notifyParent: refreshState
+            ),
           ],
         ),
       ),

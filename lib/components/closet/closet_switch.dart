@@ -1,22 +1,14 @@
 import 'package:flutter/material.dart';
 
-class ClosetSwitchButton extends StatefulWidget {
-  const ClosetSwitchButton({super.key});
+class ClosetSwitchButton extends StatelessWidget {
+  const ClosetSwitchButton({
+    super.key,
+    required this.showCloset,
+    required this.toggleSwitch,
+  });
+  final bool showCloset;
+  final Function toggleSwitch;
 
-  @override
-  State<ClosetSwitchButton> createState() => _SwitchState();
-}
-
-class _SwitchState extends State<ClosetSwitchButton> {
-  bool showCloset = true;
-  var textValue = 'Closet';
-
-  void toggleSwitch(bool value) {
-    setState(() {
-      showCloset = !showCloset;
-      textValue = showCloset ? 'Closet' : 'Store';
-    });
-  }
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -43,7 +35,7 @@ class _SwitchState extends State<ClosetSwitchButton> {
                       ),
                     ),
                     onTap: () {
-                      toggleSwitch(showCloset);
+                      toggleSwitch(true);
                     },
                   ),
                   InkWell(
@@ -59,7 +51,7 @@ class _SwitchState extends State<ClosetSwitchButton> {
                       ),
                     ),
                     onTap: () {
-                      toggleSwitch(showCloset);
+                      toggleSwitch(false);
                     },
                   ),
                 ],
