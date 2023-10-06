@@ -93,17 +93,15 @@ class SparkPetNavBar extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     NavBarButton(
-                      icon: SparkIcons.history,
-                      size: 32,
+                      icon: Icons.store,
+                      size: 28,
                       onPressed: notifyParent,
                       currentPageIndex: currentPageIndex,
                       thisPageIndex: 0,
-                      bottomPadding: 9,
-                      leftPadding: 3,
                     ),
                     NavBarButton(
                       icon: SparkIcons.hanger,
-                      size: 34,
+                      size: 30,
                       onPressed: notifyParent,
                       currentPageIndex: currentPageIndex,
                       thisPageIndex: 1,
@@ -114,14 +112,14 @@ class SparkPetNavBar extends StatelessWidget {
                     ),
                     NavBarButton(
                       icon: SparkIcons.leaderboard,
-                      size: 28,
+                      size: 24,
                       onPressed: notifyParent,
                       currentPageIndex: currentPageIndex,
                       thisPageIndex: 3,
                     ),
                     NavBarButton(
                       icon: SparkIcons.goals,
-                      size: 32,
+                      size: 28,
                       onPressed: notifyParent,
                       currentPageIndex: currentPageIndex,
                       thisPageIndex: 4,
@@ -152,7 +150,7 @@ class SparkPetNavBar extends StatelessWidget {
                   ),
                   child: Icon(
                     SparkIcons.home,
-                    size: 54,
+                    size: 40,
                     color: Colors.white,
                   ),
                 ),

@@ -1,6 +1,6 @@
 import 'package:spark_pet/screens/challenges.dart';
-import 'package:spark_pet/screens/closet_store.dart';
-import 'package:spark_pet/screens/exercise_history.dart';
+import 'package:spark_pet/screens/closet.dart';
+import 'package:spark_pet/screens/store.dart';
 import 'package:spark_pet/screens/home.dart';
 import 'package:spark_pet/screens/leaderboard.dart';
 import 'package:flutter/material.dart';
@@ -37,8 +37,8 @@ class _SparkPetState extends State<SparkPet> {
           alignment: Alignment.bottomCenter,
           children: [
             <Widget>[
-              const HistoryScreen(),
-              const ClosetStoreScreen(),
+              const StoreScreen(),
+              const ClosetScreen(),
               const HomeScreen(),
               const LeaderboardScreen(),
               const ChallengesScreen(),

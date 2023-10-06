@@ -101,31 +101,12 @@ class _HomeState extends State<HomeScreen> {
               ),
             ),
             const SizedBox(height: 16),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget> [
-                CircularProgress(
-                  progressBarColor: Color(0xff1d8eec),
-                  title: "Steps",
-                  currentProgress: 1293.0,
-                  goal: 2000.0,
-                  round: true,
-                ),
-                CircularProgress(
-                  progressBarColor: Color(0xfffdc50f),
-                  title: "Calories",
-                  currentProgress: 301.0,
-                  goal: 500.0,
-                  round: true,
-                ),
-                CircularProgress(
-                  progressBarColor: Color(0xff0c8c31),
-                  title: "Distance",
-                  currentProgress: 2.1,
-                  goal: 4.0,
-                  round: false,
-                ),
-              ],
+            const CircularProgress(
+              progressBarColor: Color(0xff1d8eec),
+              title: "Steps",
+              currentProgress: 1293.0,
+              goal: 2000.0,
+              round: true,
             ),
             const SizedBox(height: 20),
             TextButton(
