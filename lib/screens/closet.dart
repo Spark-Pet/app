@@ -5,8 +5,6 @@ import '../components/closet/closet_grid.dart';
 class ClosetScreen extends StatefulWidget {
   const ClosetScreen({super.key});
 
-  final String title = 'Closet';
-
   @override
   State<ClosetScreen> createState() => _ClosetState();
 }

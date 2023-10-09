@@ -7,8 +7,6 @@ import '../components/home/progress_bar.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
-  final String title = 'Home';
-
   @override
   State<HomeScreen> createState() => _HomeState();
 }

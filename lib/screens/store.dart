@@ -4,8 +4,6 @@ import 'package:spark_pet/components/closet/store_grid.dart';
 class StoreScreen extends StatefulWidget {
   const StoreScreen({super.key});
 
-  final String title = 'Store';
-
   @override
   State<StoreScreen> createState() => _StoreState();
 }

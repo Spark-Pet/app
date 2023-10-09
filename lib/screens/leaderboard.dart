@@ -6,7 +6,6 @@ import '../components/leaderboard/leaderboard_table_text.dart';
 class LeaderboardScreen extends StatelessWidget {
   const LeaderboardScreen({super.key, required this.notifyParent});
 
-  final String title = 'Leaderboards';
   final Function(Container) notifyParent;
 
   TableRow clickableTableRow({

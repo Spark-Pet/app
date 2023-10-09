@@ -1,32 +1,49 @@
 import 'package:flutter/material.dart';
 
+import '../components/challenges/challenge_switch.dart';
+import '../components/leaderboard/leaderboard_table_text.dart';
+
 class ChallengesScreen extends StatefulWidget {
   const ChallengesScreen({super.key});
-
-  final String title = 'Challenges';
 
   @override
   State<ChallengesScreen> createState() => _ChallengesState();
 }
 
 class _ChallengesState extends State<ChallengesScreen> {
+  bool showActive = true; // active challenges vs historical challenges
+
+  void refreshState(bool newShowActive) {
+    setState(() {
+      showActive = newShowActive;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Challenges',
+      body: Column(
+        children: <Widget>[
+          const SizedBox(height: 50),
+          const Text(
+            'Challenges',
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
             ),
-          ],
-        ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 30, right: 30, top: 10),
+            child: ChallengesSwitchButton(
+              showActive: showActive,
+              toggleSwitch: refreshState,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
+            child: Container(),
+          ),
+        ],
       ),
     );
   }

@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 
 import 'components/spark_pet_nav_bar.dart';
 
-
 class SparkPet extends StatefulWidget {
   const SparkPet({Key? key}) : super(key: key);
 
