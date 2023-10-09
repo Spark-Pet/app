@@ -12,11 +12,11 @@ class ChallengesSwitchButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 20, right: 20),
+      padding: const EdgeInsets.only(left: 16, right: 16),
       child: Stack(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 4, bottom: 4),
+            padding: const EdgeInsets.only(top: 4, bottom: 4, left: 4, right: 4),
             child: Container(
               height: 42,
               decoration: BoxDecoration(
