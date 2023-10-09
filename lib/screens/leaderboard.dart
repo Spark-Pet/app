@@ -37,16 +37,11 @@ class SixteenVCentered extends StatelessWidget {
   }
 }
 
-class LeaderboardScreen extends StatefulWidget {
-  const LeaderboardScreen({super.key});
+class LeaderboardScreen extends StatelessWidget {
+  const LeaderboardScreen({super.key, required this.notifyParent});
 
   final String title = 'Leaderboards';
-
-  @override
-  State<LeaderboardScreen> createState() => _LeaderboardState();
-}
-
-class _LeaderboardState extends State<LeaderboardScreen> {
+  final Function(Container) notifyParent;
 
   TableRow clickableTableRow({
     required List<Widget> children,
@@ -91,7 +86,7 @@ class _LeaderboardState extends State<LeaderboardScreen> {
                 width: 1,
               ),
               children: [
-                const TableRow(
+                TableRow(
                   children: [
                     SixteenBoldVCentered(''),
                     SixteenBoldVCentered('Username'),
@@ -105,7 +100,46 @@ class _LeaderboardState extends State<LeaderboardScreen> {
                     SixteenVCentered('24,012'),
                   ],
                   onTap: () {
-                    print('Row 1 clicked');
+                    notifyParent(Container(
+                      height: 270,
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          left: 30, right: 30, top: 15, bottom: 15,
+                        ),
+                        child: Column(
+                          children: [
+                            Text(
+                              'username1',
+                              style: const TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              'Member since October 2023',
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Image(
+                                  image: AssetImage('assets/images/dog.png'),
+                                  width: 120,
+                                  height: 120,
+                              ),
+                            ),
+                            Text(
+                              'Level 5',
+                            ),
+                            Text(
+                              'Current Streak: 20 days',
+                            )
+                          ],
+                        ),
+                      )
+                    ));
                   },
                 ),
                 clickableTableRow(

@@ -16,11 +16,20 @@ class SparkPet extends StatefulWidget {
 }
 
 class _SparkPetState extends State<SparkPet> {
-  int currentPageIndex = 2;
+  Container _modal = Container();
+  int _currentPageIndex = 2;
+  bool _showModal = false;
 
-  void refreshState(int newIndex) {
+  void updatePageIndex(int newIndex) {
     setState(() {
-      currentPageIndex = newIndex;
+      _currentPageIndex = newIndex;
+    });
+  }
+
+  void updateModalContent(Container newModal) {
+    setState(() {
+      _showModal = true;
+      _modal = newModal;
     });
   }
 
@@ -40,12 +49,40 @@ class _SparkPetState extends State<SparkPet> {
               const StoreScreen(),
               const ClosetScreen(),
               const HomeScreen(),
-              const LeaderboardScreen(),
+              LeaderboardScreen(
+                notifyParent: updateModalContent,
+              ),
               const ChallengesScreen(),
-            ][currentPageIndex],
+            ][_currentPageIndex],
             SparkPetNavBar(
-              currentPageIndex: currentPageIndex,
-              notifyParent: refreshState
+              currentPageIndex: _currentPageIndex,
+              notifyParent: updatePageIndex
+            ),
+            if (_showModal) Stack(
+              children: [
+                InkWell(
+                  child: Flex(
+                    direction: Axis.vertical,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            color: Color(0x56000000),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  onTap: () {
+                    setState(() {
+                      _showModal = false;
+                    });
+                  },
+                ),
+                Center(
+                  child: _modal,
+                )
+              ],
             ),
           ],
         ),
