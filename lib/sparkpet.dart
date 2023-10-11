@@ -1,5 +1,6 @@
 import 'package:spark_pet/screens/challenges.dart';
 import 'package:spark_pet/screens/closet.dart';
+import 'package:spark_pet/screens/login.dart';
 import 'package:spark_pet/screens/store.dart';
 import 'package:spark_pet/screens/home.dart';
 import 'package:spark_pet/screens/leaderboard.dart';
@@ -17,7 +18,14 @@ class SparkPet extends StatefulWidget {
 class _SparkPetState extends State<SparkPet> {
   Container _modal = Container();
   int _currentPageIndex = 2;
+  bool _loggedIn = false;
   bool _showModal = false;
+
+  void updateLoginStatus(bool loggedIn) {
+    setState(() {
+      _loggedIn = loggedIn;
+    });
+  }
 
   void updatePageIndex(int newIndex) {
     setState(() {
@@ -41,49 +49,54 @@ class _SparkPetState extends State<SparkPet> {
         useMaterial3: true,
       ),
       home: Scaffold(
-        body: Stack(
-          alignment: Alignment.bottomCenter,
-          children: [
-            <Widget>[
-              const StoreScreen(),
-              const ClosetScreen(),
-              const HomeScreen(),
-              LeaderboardScreen(
-                notifyParent: updateModalContent,
+        body: SafeArea(
+          child: _loggedIn ? Stack(
+            alignment: Alignment.bottomCenter,
+            children: [
+              <Widget>[
+                const StoreScreen(),
+                const ClosetScreen(),
+                const HomeScreen(),
+                LeaderboardScreen(
+                  notifyParent: updateModalContent,
+                ),
+                const ChallengesScreen(),
+              ][_currentPageIndex],
+              SparkPetNavBar(
+                currentPageIndex: _currentPageIndex,
+                notifyParent: updatePageIndex
               ),
-              const ChallengesScreen(),
-            ][_currentPageIndex],
-            SparkPetNavBar(
-              currentPageIndex: _currentPageIndex,
-              notifyParent: updatePageIndex
-            ),
-            if (_showModal) Stack(
-              children: [
-                InkWell(
-                  child: Flex(
-                    direction: Axis.vertical,
-                    children: [
-                      Expanded(
-                        child: Container(
-                          decoration: const BoxDecoration(
-                            color: Color(0x56000000),
+              if (_showModal) Stack(
+                children: [
+                  InkWell(
+                    child: Flex(
+                      direction: Axis.vertical,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            decoration: const BoxDecoration(
+                              color: Color(0x56000000),
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
+                    onTap: () {
+                      setState(() {
+                        _showModal = false;
+                      });
+                    },
                   ),
-                  onTap: () {
-                    setState(() {
-                      _showModal = false;
-                    });
-                  },
-                ),
-                Center(
-                  child: _modal,
-                )
-              ],
-            ),
-          ],
+                  Center(
+                    child: _modal,
+                  )
+                ],
+              ),
+            ],
+          )
+          : LoginScreen(
+            notifyParent: updateLoginStatus,
+          ),
         ),
       ),
     );
