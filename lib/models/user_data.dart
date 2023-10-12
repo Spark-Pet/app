@@ -10,6 +10,7 @@ class UserData {
     required this.purchasedAccessoryIds,
     required this.activeChallengeIds,
     required this.pastChallengeIds,
+    required this.dateJoined,
     this.imagePath,
   });
 
@@ -23,10 +24,11 @@ class UserData {
   List<String> purchasedAccessoryIds;
   List<String> activeChallengeIds;
   List<String> pastChallengeIds;
+  DateTime dateJoined;
   String? imagePath;
 }
 
-class UserDB {
+class UserDb {
   final List<UserData> _users = [
     UserData(
       id: 'user-001',
@@ -39,6 +41,7 @@ class UserDB {
       purchasedAccessoryIds: ['accessory-001'],
       activeChallengeIds: [],
       pastChallengeIds: [],
+      dateJoined: DateTime(2023, 10, 1),
     ),
     UserData(
       id: 'user-002',
@@ -51,6 +54,7 @@ class UserDB {
       purchasedAccessoryIds: [],
       activeChallengeIds: [],
       pastChallengeIds: [],
+      dateJoined: DateTime(2023, 10, 4),
     ),
     UserData(
       id: 'user-003',
@@ -63,6 +67,7 @@ class UserDB {
       purchasedAccessoryIds: [],
       activeChallengeIds: [],
       pastChallengeIds: [],
+      dateJoined: DateTime(2023, 10, 6),
     )
   ];
 
@@ -76,7 +81,7 @@ class UserDB {
 }
 
 /// The singleton instance providing access to all user data for clients.
-UserDB userDB = UserDB();
+UserDb userDb = UserDb();
 
 /// The currently logged in user.
-String currentUserID = 'user-001';
+String currentUserId = 'user-001';

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../components/challenges/challenge_cards.dart';
 import '../components/challenges/challenge_switch.dart';
 import '../models/challenges_data.dart';
+import '../util/constants.dart';
 
 class ChallengesScreen extends StatefulWidget {
   const ChallengesScreen({super.key});
@@ -13,21 +14,6 @@ class ChallengesScreen extends StatefulWidget {
 
 class _ChallengesState extends State<ChallengesScreen> {
   bool showActive = true; // active challenges vs historical challenges
-
-  final List<String> months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
-  ];
 
   final List<ChallengesData> _activeChallenges = challengesDb.getActiveChallenges();
   final List<ChallengesData> _historicalChallenges = challengesDb.getHistoricalChallenges();
@@ -70,7 +56,7 @@ class _ChallengesState extends State<ChallengesScreen> {
                           desc: challenge.description,
                           reward: challenge.reward,
                           entryCost: challenge.costEntry,
-                          activeDates: '${challenge.startDate.day} - ${challenge.endDate.day} ${months[challenge.startDate.month - 1]} ${challenge.startDate.year}',
+                          activeDates: '${challenge.startDate.day} - ${challenge.endDate.day} ${Constants.getFullMonth(challenge.startDate.month)} ${challenge.startDate.year}',
                         ),
                       )).toList()
                     : _historicalChallenges.map((challenge) => Padding(
@@ -79,7 +65,7 @@ class _ChallengesState extends State<ChallengesScreen> {
                           title: challenge.name,
                           reward: challenge.reward,
                           desc: challenge.description, // DateFormat format = new DateFormat("MMMM dd, yyyy"); var formattedDate = format.parse(dateString);
-                          activeDates: '${challenge.startDate.day} - ${challenge.endDate.day} ${months[challenge.startDate.month - 1]} ${challenge.startDate.year}',
+                          activeDates: '${challenge.startDate.day} - ${challenge.endDate.day} ${Constants.getFullMonth(challenge.startDate.month)} ${challenge.startDate.year}',
                           totalParticipants: challenge.totalParticipants,
                           successRate: (challenge.successfulParticipants / challenge.totalParticipants * 100).round(),
                         ),

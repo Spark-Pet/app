@@ -63,4 +63,4 @@ class PetDb {
   }
 }
 
-PetDb accessoryDb = PetDb();
+PetDb petDb = PetDb();
