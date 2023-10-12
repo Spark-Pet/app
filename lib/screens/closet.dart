@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../models/accessory_data.dart';
+import '../models/user_data.dart';
+
 class ClosetScreen extends StatefulWidget {
   const ClosetScreen({super.key});
 
@@ -8,13 +11,8 @@ class ClosetScreen extends StatefulWidget {
 }
 
 class _ClosetState extends State<ClosetScreen> {
-  bool showCloset = true;
-
-  void refreshState(bool newShowCloset) {
-    setState(() {
-      showCloset = newShowCloset;
-    });
-  }
+  final List<AccessoryData> _purchasedAccessories = accessoryDb.getAllAccessoriesById(userDb.getUser(currentUserId).purchasedAccessoryIds);
+  // todo load these into the closet grid
 
   @override
   Widget build(BuildContext context) {

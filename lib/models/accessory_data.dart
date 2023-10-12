@@ -39,12 +39,12 @@ class AccessoryDb {
     ),
   ];
 
-  AccessoryData getAccessory(String accessoryId) {
+  AccessoryData getAccessoryByID(String accessoryId) {
     return _accessories.firstWhere((data) => data.id == accessoryId);
   }
 
-  List<String> getAllAccessoryIds() {
-    return _accessories.map((data) => data.id).toList();
+  List<AccessoryData> getAllAccessoriesById(List<String> accessoryIds) {
+    return _accessories.where((data) => accessoryIds.contains(data.id)).toList();
   }
 }
 
