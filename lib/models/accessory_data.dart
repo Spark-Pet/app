@@ -4,7 +4,8 @@ class AccessoryData {
     required this.name,
     required this.imagePath,
     required this.price,
-    required this.type});
+    required this.type,
+  });
 
   String id;
   String name;
