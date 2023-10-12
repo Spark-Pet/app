@@ -45,12 +45,6 @@ class AccessoryDb {
   List<String> getAllAccessoryIds() {
     return _accessories.map((data) => data.id).toList();
   }
-
-  List<String> getAssociatedAccessoryIds(String userID) {
-    Set<String> chapterIDs = {};
-    // TODO
-    return chapterIDs.toList();
-  }
 }
 
 AccessoryDb accessoryDb = AccessoryDb();
