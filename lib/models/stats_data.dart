@@ -27,11 +27,13 @@ class StatsData {
   StatsData({
     required this.userId,
     required this.steps,
+    required this.dailyStepsGoal,
     required this.currentStreakDays,
   });
 
   String userId;
   List<int> steps; // steps[6] is always today, steps[0] is 6 days ago
+  int dailyStepsGoal;
   int currentStreakDays;
 }
 
@@ -40,16 +42,19 @@ class StatsDb {
     StatsData(
       userId: 'user-001',
       steps: [2403, 1230, 4310, 3551, 4530, 1023, 3039],
+      dailyStepsGoal: 3000,
       currentStreakDays: 1,
     ),
     StatsData(
       userId: 'user-002',
       steps: [3042, 3932, 3029, 3351, 3519, 3012, 3018],
+      dailyStepsGoal: 3000,
       currentStreakDays: 13,
     ),
     StatsData(
       userId: 'user-003',
       steps: [2403, 1230, 4310, 3921, 4530, 3551, 4212],
+      dailyStepsGoal: 3000,
       currentStreakDays: 5,
     ),
   ];

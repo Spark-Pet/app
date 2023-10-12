@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:spark_pet/components/home/circular_progress.dart';
 import 'package:spark_pet/icons/bone_icon.dart';
+import 'package:spark_pet/models/pet_data.dart';
 
 import '../components/home/progress_bar.dart';
+import '../models/stats_data.dart';
+import '../models/user_data.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,6 +15,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeState extends State<HomeScreen> {
+  final UserData _user = userDb.getUser(currentUserId);
+  final PetData _pet = petDb.getPetByOwnerId(currentUserId);
+  final StatsData _stats = statsDb.getStats(currentUserId);
 
   @override
   Widget build(BuildContext context) {
@@ -35,16 +41,16 @@ class _HomeState extends State<HomeScreen> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                     ),
-                    const Row(
+                    Row(
                       children: [
                         Text(
-                          '124',
-                          style: TextStyle(
+                          _user.bones.toString(),
+                          style: const TextStyle(
                             fontSize: 18,
                             color: Colors.white,
                           ),
                         ),
-                        Icon(
+                        const Icon(
                           BoneIcon.bone,
                           size: 20,
                           color: Colors.white,
@@ -56,21 +62,21 @@ class _HomeState extends State<HomeScreen> {
               ]
             ),
             const SizedBox(height: 20),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget> [
                 Expanded(child: ProgressBar(
                   progressBarColor: Color(0xffe1ab3c),
-                  title: "Level 5",
-                  currentProgress: 5,
-                  progressTotal: 10,
+                  title: 'Level ${_pet.currentLevel}',
+                  currentProgress: _pet.progressNextLevel,
+                  progressTotal: 100,
                 )),
                 SizedBox(width: 10),
                 Expanded(child: ProgressBar(
                   progressBarColor: Color(0xffe82c40),
-                  title: "HP",
-                  currentProgress: 72,
-                  progressTotal: 100,
+                  title: 'HP ${_pet.hpCurrent}/${_pet.hpTotal}',
+                  currentProgress: _pet.hpCurrent,
+                  progressTotal: _pet.hpTotal,
                 )),
               ],
             ),
@@ -99,11 +105,11 @@ class _HomeState extends State<HomeScreen> {
               ),
             ),
             const SizedBox(height: 16),
-            const CircularProgress(
+            CircularProgress(
               progressBarColor: Color(0xff1d8eec),
               title: "Steps",
-              currentProgress: 1293.0,
-              goal: 2000.0,
+              currentProgress: _stats.steps[6].toDouble(),
+              goal: _stats.dailyStepsGoal.toDouble(),
               round: true,
             ),
             const SizedBox(height: 20),
