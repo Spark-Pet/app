@@ -8,6 +8,8 @@ class ChallengesData {
     required this.costEntry,
     required this.reward,
     required this.requirement,
+    required this.totalParticipants,
+    required this.successfulParticipants,
   });
 
   String id;
@@ -17,7 +19,9 @@ class ChallengesData {
   DateTime endDate;
   int costEntry;
   int reward;
-  Function(int, List<int>) requirement;
+  int totalParticipants;
+  int successfulParticipants;
+  Function(int, int, List<int>) requirement; // stepGoal, streak, steps
 }
 
 class ChallengesDb {
@@ -30,7 +34,7 @@ class ChallengesDb {
       endDate: DateTime(2023, 10, 7),
       costEntry: 25,
       reward: 100,
-      requirement: (_, steps) {
+      requirement: (stepsGoal, streak, steps) {
         for (int i = 0; i < steps.length; i++) {
           if (steps[i] > 10000) {
             return true;
@@ -38,6 +42,8 @@ class ChallengesDb {
         }
         return false;
       },
+      totalParticipants: 0,
+      successfulParticipants: 0,
     ),
     ChallengesData(
       id: 'challenge-002',
@@ -47,7 +53,7 @@ class ChallengesDb {
       endDate: DateTime(2023, 10, 31),
       costEntry: 50,
       reward: 250,
-      requirement: (stepsGoal, steps) {
+      requirement: (stepsGoal, streak, steps) {
         int daysInRow = 0;
         for (int i = 0; i < steps.length; i++) {
           if (steps[i] >= stepsGoal * 1.5) {
@@ -61,11 +67,39 @@ class ChallengesDb {
         }
         return false;
       },
+      totalParticipants: 0,
+      successfulParticipants: 0,
     ),
+    ChallengesData(
+      id: 'challenge-003',
+      name: 'No Rest For the Weary',
+      description: 'Meet your steps goal every day for the entire month of September.',
+      startDate: DateTime(2023, 9, 1),
+      endDate: DateTime(2023, 9, 30),
+      costEntry: 100,
+      reward: 500,
+      requirement: (stepsGoal, streak, steps) {
+        // this needs work
+        if (DateTime.now().month == 9 && DateTime.now().day == 30 && streak >= 30) {
+          return true;
+        }
+        return false;
+      },
+      totalParticipants: 15030,
+      successfulParticipants: 9201,
+    )
   ];
 
   ChallengesData getChallenge(String challengeId) {
     return _challenges.firstWhere((data) => data.id == challengeId);
+  }
+
+  List<ChallengesData> getActiveChallenges() {
+    return _challenges.where((data) => data.startDate.isBefore(DateTime.now()) && data.endDate.isAfter(DateTime.now())).toList();
+  }
+
+  List<ChallengesData> getHistoricalChallenges() {
+    return _challenges.where((data) => data.endDate.isBefore(DateTime.now())).toList();
   }
 }
 
