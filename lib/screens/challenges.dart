@@ -14,45 +14,23 @@ class ChallengesScreen extends StatefulWidget {
 class _ChallengesState extends State<ChallengesScreen> {
   bool showActive = true; // active challenges vs historical challenges
 
-  final List<ChallengesData> activeChallenges = challengesDb.getActiveChallenges();
-  final List<ChallengesData> historicalChallenges = challengesDb.getHistoricalChallenges();
-
-  final List<Padding> _activeChallengesList = [
-    Padding(
-      padding: EdgeInsets.only(bottom: 10),
-      child: ChallengeCardActive(
-        title: '10K in a Day',
-        desc: 'Run, walk, or crawl 10,000 steps in a single day.',
-        reward: 100,
-        entryCost: 25,
-        activeDates: 'Oct 10 - Oct 17',
-      ),
-    ),
-    Padding(
-      padding: EdgeInsets.only(bottom: 10),
-      child: ChallengeCardActive(
-        title: 'Hat Trick',
-        desc: 'Exceed your steps goal by 50% for three days in a row.',
-        reward: 250,
-        entryCost: 50,
-        activeDates: 'Oct 1 - Oct 31',
-      ),
-    ),
+  final List<String> months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
   ];
 
-  final List<Padding> _historicalChallengesLIst = [
-    Padding(
-      padding: EdgeInsets.only(bottom: 10),
-      child: ChallengeCardHistorical(
-        title: 'No Rest For the Weary',
-        reward: 500,
-        desc: 'Meet your steps goal every day for one month.',
-        activeDates: '1 - 30 Sep 2023',
-        totalParticipants: '15k+',
-        successRate: 67,
-      ),
-    ),
-  ];
+  final List<ChallengesData> _activeChallenges = challengesDb.getActiveChallenges();
+  final List<ChallengesData> _historicalChallenges = challengesDb.getHistoricalChallenges();
 
   void refreshState(bool newShowActive) {
     setState(() {
@@ -84,7 +62,28 @@ class _ChallengesState extends State<ChallengesScreen> {
             Padding(
               padding: const EdgeInsets.only(left: 30, right: 30, top: 10, bottom: 10),
               child: Column(
-                children: showActive ? _activeChallengesList : _historicalChallengesLIst
+                children: showActive
+                    ? _activeChallenges.map((challenge) => Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: ChallengeCardActive(
+                          title: challenge.name,
+                          desc: challenge.description,
+                          reward: challenge.reward,
+                          entryCost: challenge.costEntry,
+                          activeDates: '${challenge.startDate.day} - ${challenge.endDate.day} ${months[challenge.startDate.month - 1]} ${challenge.startDate.year}',
+                        ),
+                      )).toList()
+                    : _historicalChallenges.map((challenge) => Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: ChallengeCardHistorical(
+                          title: challenge.name,
+                          reward: challenge.reward,
+                          desc: challenge.description, // DateFormat format = new DateFormat("MMMM dd, yyyy"); var formattedDate = format.parse(dateString);
+                          activeDates: '${challenge.startDate.day} - ${challenge.endDate.day} ${months[challenge.startDate.month - 1]} ${challenge.startDate.year}',
+                          totalParticipants: challenge.totalParticipants,
+                          successRate: (challenge.successfulParticipants / challenge.totalParticipants * 100).round(),
+                        ),
+                      )).toList(),
               ),
             ),
             const SizedBox(height: 50),

@@ -31,7 +31,7 @@ class ChallengesDb {
       name: '10K in a Day',
       description: 'Run, walk, or crawl 10,000 steps in a single day.',
       startDate: DateTime(2023, 10, 10),
-      endDate: DateTime(2023, 10, 7),
+      endDate: DateTime(2023, 10, 17),
       costEntry: 25,
       reward: 100,
       requirement: (stepsGoal, streak, steps) {
@@ -95,7 +95,7 @@ class ChallengesDb {
   }
 
   List<ChallengesData> getActiveChallenges() {
-    return _challenges.where((data) => data.startDate.isBefore(DateTime.now()) && data.endDate.isAfter(DateTime.now())).toList();
+    return _challenges.where((data) => data.endDate.isAfter(DateTime.now())).toList();
   }
 
   List<ChallengesData> getHistoricalChallenges() {

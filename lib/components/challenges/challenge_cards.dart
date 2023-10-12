@@ -85,7 +85,6 @@ class ChallengeCardActive extends StatelessWidget {
                   desc,
                   textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 10),
                 TextButton(
                   onPressed: () {},
                   child: Container(
@@ -144,11 +143,19 @@ class ChallengeCardHistorical extends StatelessWidget {
   final int reward;
   final String desc;
   final String activeDates;
-  final String totalParticipants;
+  final int totalParticipants;
   final int successRate;
 
   @override
   Widget build(BuildContext context) {
+    String _totalParticipantsShort;
+
+    if (totalParticipants >= 1000) {
+      _totalParticipantsShort = '${(totalParticipants / 1000).round()}K+';
+    } else {
+      _totalParticipantsShort = '$totalParticipants';
+    }
+
     return Column(
       children: [
         Container(
@@ -196,7 +203,7 @@ class ChallengeCardHistorical extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Icon(
+                    const Icon(
                       BoneIcon.bone,
                       size: 25,
                     )
@@ -206,16 +213,17 @@ class ChallengeCardHistorical extends StatelessWidget {
                   desc,
                   textAlign: TextAlign.center,
                 ),
+                SizedBox(height: 10),
                 Text(
-                  '$totalParticipants Total Participants',
-                  style: TextStyle(
+                  '$_totalParticipantsShort Total Participants',
+                  style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
                   '$successRate% Success Rate',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
