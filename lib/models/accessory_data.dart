@@ -54,8 +54,8 @@ class AccessoryDb {
     return _accessories.where((data) => accessoryIds.contains(data.id)).toList();
   }
 
-  List<AccessoryData> getAllAccessories() {
-    return _accessories.toList();
+  List<AccessoryData> getAllAccessoriesExcept(List<String> accessoryIds) {
+    return _accessories.where((data) => !accessoryIds.contains(data.id)).toList();
   }
 }
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../icons/bone_icon.dart';
 import '../models/accessory_data.dart';
+import '../models/user_data.dart';
 
 class StoreItem extends StatelessWidget {
   final AccessoryData accessoryData;
@@ -26,7 +27,7 @@ class StoreItem extends StatelessWidget {
             ),
             child: Column(
               children: [
-                Spacer(),
+                const Spacer(),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: Image(
@@ -34,7 +35,7 @@ class StoreItem extends StatelessWidget {
                     fit: BoxFit.contain,
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Text(
                   accessoryData.name,
                   style: const TextStyle(
@@ -42,7 +43,7 @@ class StoreItem extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
               ],
             ),
           ),
@@ -92,8 +93,7 @@ class StoreScreen extends StatefulWidget {
 }
 
 class _StoreState extends State<StoreScreen> {
-
-  final List<AccessoryData> _allAccessories = accessoryDb.getAllAccessories();
+  final List<AccessoryData> _allAccessories = accessoryDb.getAllAccessoriesExcept(userDb.getUser(currentUserId).purchasedAccessoryIds);
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +110,7 @@ class _StoreState extends State<StoreScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.only(left: 26, right: 26),
               child: GridView.builder(
