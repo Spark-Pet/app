@@ -30,8 +30,8 @@ class ChallengesDb {
       id: 'challenge-001',
       name: '10K in a Day',
       description: 'Run, walk, or crawl 10,000 steps in a single day.',
-      startDate: DateTime(2023, 10, 10),
-      endDate: DateTime(2023, 10, 17),
+      startDate: DateTime(2023, 10, 15),
+      endDate: DateTime(2023, 10, 31),
       costEntry: 25,
       reward: 100,
       requirement: (stepsGoal, streak, steps) {
