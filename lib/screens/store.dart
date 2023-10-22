@@ -7,10 +7,7 @@ import '../models/user_data.dart';
 class StoreItem extends StatelessWidget {
   final AccessoryData accessoryData;
 
-  const StoreItem({
-    super.key,
-    required this.accessoryData,
-  });
+  const StoreItem({super.key, required this.accessoryData});
 
   @override
   Widget build(BuildContext context) {
