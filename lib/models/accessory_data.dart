@@ -37,6 +37,13 @@ class AccessoryDb {
       price: 500,
       type: 'hat',
     ),
+    AccessoryData(
+      id: 'accessory-004',
+      name: 'Health Potion',
+      imagePath: 'assets/images/accessories/potion.png',
+      price: 1000,
+      type: 'potion',
+    ),
   ];
 
   AccessoryData getAccessoryByID(String accessoryId) {
@@ -45,6 +52,10 @@ class AccessoryDb {
 
   List<AccessoryData> getAllAccessoriesById(List<String> accessoryIds) {
     return _accessories.where((data) => accessoryIds.contains(data.id)).toList();
+  }
+
+  List<AccessoryData> getAllAccessories() {
+    return _accessories.toList();
   }
 }
 

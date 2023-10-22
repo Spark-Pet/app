@@ -1,6 +1,88 @@
 import 'package:flutter/material.dart';
 
 import '../icons/bone_icon.dart';
+import '../models/accessory_data.dart';
+
+class StoreItem extends StatelessWidget {
+  final AccessoryData accessoryData;
+
+  const StoreItem({
+    super.key,
+    required this.accessoryData,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Expanded(
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(
+                  color: Colors.black,
+                  width: 2
+              ),
+            ),
+            child: Column(
+              children: [
+                Spacer(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Image(
+                    image: AssetImage(accessoryData.imagePath),
+                    fit: BoxFit.contain,
+                  ),
+                ),
+                Spacer(),
+                Text(
+                  accessoryData.name,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 5),
+              ],
+            ),
+          ),
+        ),
+        TextButton(
+          onPressed: () {},
+          child: Container(
+            height: 40,
+            decoration: BoxDecoration(
+              color: Colors.green,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Center(
+                  child: Text(
+                    accessoryData.price.toString(),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 5),
+                const Center(
+                  child: Icon(
+                    BoneIcon.bone,
+                    size: 20,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
 
 class StoreScreen extends StatefulWidget {
   const StoreScreen({super.key});
@@ -10,6 +92,8 @@ class StoreScreen extends StatefulWidget {
 }
 
 class _StoreState extends State<StoreScreen> {
+
+  final List<AccessoryData> _allAccessories = accessoryDb.getAllAccessories();
 
   @override
   Widget build(BuildContext context) {
@@ -26,81 +110,22 @@ class _StoreState extends State<StoreScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.only(left: 26, right: 26),
               child: GridView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: 9,
+                itemCount: _allAccessories.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   mainAxisSpacing: 10,
                   crossAxisSpacing: 10,
-                  childAspectRatio: 0.8,
+                  childAspectRatio: 0.7,
                 ),
                 itemBuilder: (BuildContext context, int index) {
-                  return Column(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
-                              color: Colors.black,
-                              width: 2
-                          ),
-                        ),
-                        child: const Column(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.all(5),
-                              child: Image(
-                                image: AssetImage('assets/images/accessories/hat-cowboy.png'),
-                                fit: BoxFit.contain,
-                              ),
-                            ),
-                            Text(
-                              'Cowboy Hat',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () {},
-                        child: Container(
-                          height: 40,
-                          decoration: BoxDecoration(
-                            color: Colors.green,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: const Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Center(
-                                child: Text(
-                                  '200',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width: 5),
-                              Center(
-                                child: Icon(
-                                  BoneIcon.bone,
-                                  size: 20,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
+                  return StoreItem(
+                    accessoryData: _allAccessories[index],
                   );
                 },
               ),
