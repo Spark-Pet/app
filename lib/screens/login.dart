@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key, required this.notifyParent});
+import '../models/user_data.dart';
 
-  final Function(bool) notifyParent;
+class LoginScreen extends ConsumerWidget {
+  const LoginScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 50),
@@ -75,7 +76,7 @@ class LoginScreen extends StatelessWidget {
                 )
               ),
               onPressed: () {
-                notifyParent(true);
+                ref.read(currentUserIDProvider.notifier).state = 'user-001';
               },
             ),
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:spark_pet/sparkpet.dart';
 import '../icons/spark_icons.dart';
 
-class NavBarButton extends StatelessWidget {
+class NavBarButton extends ConsumerWidget {
   /// A button for the navigation bar (below)
   const NavBarButton({
     super.key,
     required this.icon,
     required this.size,
-    required this.onPressed,
     required this.currentPageIndex,
     required this.thisPageIndex,
     this.topPadding = 0,
@@ -20,7 +21,6 @@ class NavBarButton extends StatelessWidget {
   final double size;
   final int currentPageIndex;
   final int thisPageIndex;
-  final Function onPressed;
 
   final double topPadding;
   final double bottomPadding;
@@ -28,7 +28,7 @@ class NavBarButton extends StatelessWidget {
   final double rightPadding;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Material(
       color: Colors.transparent,
       child: Ink(
@@ -52,7 +52,7 @@ class NavBarButton extends StatelessWidget {
             ),
           ),
           onTap: () {
-            onPressed(thisPageIndex);
+            ref.read(currentPageProvider.notifier).state = thisPageIndex;
           },
         ),
       ),
@@ -60,15 +60,13 @@ class NavBarButton extends StatelessWidget {
   }
 }
 
-class SparkPetNavBar extends StatelessWidget {
+class SparkPetNavBar extends ConsumerWidget {
   /// Custom nav bar for app
-  const SparkPetNavBar({super.key, required this.currentPageIndex, required this.notifyParent});
-
-  final int currentPageIndex;
-  final Function(int) notifyParent;
+  const SparkPetNavBar({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final currentPageIndex = ref.watch(currentPageProvider);
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [
@@ -95,14 +93,12 @@ class SparkPetNavBar extends StatelessWidget {
                     NavBarButton(
                       icon: Icons.store,
                       size: 28,
-                      onPressed: notifyParent,
                       currentPageIndex: currentPageIndex,
                       thisPageIndex: 0,
                     ),
                     NavBarButton(
                       icon: SparkIcons.hanger,
                       size: 30,
-                      onPressed: notifyParent,
                       currentPageIndex: currentPageIndex,
                       thisPageIndex: 1,
                       bottomPadding: 3,
@@ -113,14 +109,12 @@ class SparkPetNavBar extends StatelessWidget {
                     NavBarButton(
                       icon: SparkIcons.leaderboard,
                       size: 24,
-                      onPressed: notifyParent,
                       currentPageIndex: currentPageIndex,
                       thisPageIndex: 3,
                     ),
                     NavBarButton(
                       icon: SparkIcons.goals,
                       size: 28,
-                      onPressed: notifyParent,
                       currentPageIndex: currentPageIndex,
                       thisPageIndex: 4,
                     ),
@@ -155,7 +149,7 @@ class SparkPetNavBar extends StatelessWidget {
                   ),
                 ),
                 onTap: () {
-                  notifyParent(2);
+                  ref.read(currentPageProvider.notifier).state = 2;
                 },
               ),
             ),

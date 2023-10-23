@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_pet/models/stats_data.dart';
 
 import '../components/leaderboard/leaderboard_modal.dart';
 import '../components/leaderboard/leaderboard_table_text.dart';
+import '../sparkpet.dart';
 
-class LeaderboardScreen extends StatelessWidget {
-  LeaderboardScreen({super.key, required this.notifyParent});
-
-  final Function(Container) notifyParent;
-
-  final List<StatsForLeaderboard> _leaderboard = statsDb.getTodaysTopFifty();
+class LeaderboardScreen extends ConsumerWidget {
+  LeaderboardScreen({super.key});
 
   TableRow clickableTableRow({
     required List<Widget> children,
@@ -26,7 +24,8 @@ class LeaderboardScreen extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final List<StatsForLeaderboard> leaderboard = ref.watch(statsDbProvider).getTodaysTopFifty();
     return Scaffold(
       body: Column(
         children: <Widget>[
@@ -61,14 +60,15 @@ class LeaderboardScreen extends StatelessWidget {
                     LeaderboardTitleText('Steps'),
                   ],
                 ),
-                ...(_leaderboard.map((info) => clickableTableRow(
+                ...(leaderboard.map((info) => clickableTableRow(
                   children: [
                     LeaderboardRegText(info.place.toString()),
                     LeaderboardRegText(info.username),
                     LeaderboardRegText(info.steps.toString()),
                   ],
                   onTap: () {
-                    notifyParent(Container(
+                    ref.read(showMainModalProvider.notifier).state = true;
+                    ref.read(mainModalProvider.notifier).state = Container(
                       child: LeaderboardModal(
                         username: info.username,
                         joinDate: info.joinDate.toString(),
@@ -76,7 +76,7 @@ class LeaderboardScreen extends StatelessWidget {
                         currentStreak: info.currentStreakDays.toString(),
                         imageSrc: 'assets/images/dog.png', // todo change based on equipped accessories
                       ),
-                    ));
+                    );
                   },
                 )).toList()),
               ],
