@@ -1,3 +1,5 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 class ChallengesData {
   ChallengesData({
     required this.id,
@@ -103,4 +105,4 @@ class ChallengesDb {
   }
 }
 
-ChallengesDb challengesDb = ChallengesDb();
+final challengesDbProvider = Provider<ChallengesDb>((_) => ChallengesDb());

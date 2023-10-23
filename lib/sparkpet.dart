@@ -1,10 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:spark_pet/screens/challenges.dart';
 import 'package:spark_pet/screens/closet.dart';
 import 'package:spark_pet/screens/login.dart';
 import 'package:spark_pet/screens/store.dart';
 import 'package:spark_pet/screens/home.dart';
 import 'package:spark_pet/screens/leaderboard.dart';
-import 'package:flutter/material.dart';
 
 import 'components/spark_pet_nav_bar.dart';
 

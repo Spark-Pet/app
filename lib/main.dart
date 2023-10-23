@@ -1,8 +1,9 @@
-import 'package:spark_pet/sparkpet.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:spark_pet/sparkpet.dart';
 
 void main() {
-  runApp(const SparkPetApp());
+  runApp(const ProviderScope(child: SparkPetApp()));
 }
 
 class SparkPetApp extends StatelessWidget {

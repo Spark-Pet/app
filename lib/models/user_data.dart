@@ -1,3 +1,5 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 class UserData {
   UserData({
     required this.id,
@@ -80,8 +82,6 @@ class UserDb {
   }
 }
 
-/// The singleton instance providing access to all user data for clients.
-UserDb userDb = UserDb();
+final userDbProvider = Provider<UserDb>((_) => UserDb());
 
-/// The currently logged in user.
-String currentUserId = 'user-001';
+final currentUserIDProvider = StateProvider<String>((_) => 'user-001');

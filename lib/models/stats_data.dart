@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_pet/models/pet_data.dart';
 import 'package:spark_pet/models/user_data.dart';
 
@@ -38,6 +39,7 @@ class StatsData {
 }
 
 class StatsDb {
+  final ProviderRef<StatsDb> ref;
   final List<StatsData> _stats = [
     StatsData(
       userId: 'user-001',
@@ -59,11 +61,14 @@ class StatsDb {
     ),
   ];
 
+  StatsDb(this.ref);
+
   StatsData getStats(String userId) {
     return _stats.firstWhere((data) => data.userId == userId);
   }
 
   List<StatsForLeaderboard> getTodaysTopFifty() {
+    final PetDb petDb = ref.watch(petDbProvider);
     final List<StatsForLeaderboard> topFifty = [];
     _stats.sort((a, b) => b.steps[6].compareTo(a.steps[6]));
     for (var i = 0; i < _stats.length && i < 50; i++) {
@@ -83,4 +88,4 @@ class StatsDb {
   }
 }
 
-StatsDb statsDb = StatsDb();
+final statsDbProvider = Provider<StatsDb>((ref) => StatsDb(ref));

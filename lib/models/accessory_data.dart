@@ -1,3 +1,5 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 class AccessoryData {
   AccessoryData({
     required this.id,
@@ -59,4 +61,4 @@ class AccessoryDb {
   }
 }
 
-AccessoryDb accessoryDb = AccessoryDb();
+final accessoryDbProvider = Provider<AccessoryDb>((_) => AccessoryDb());
