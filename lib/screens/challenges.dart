@@ -6,16 +6,26 @@ import '../components/challenges/challenge_switch.dart';
 import '../models/challenges_data.dart';
 import '../util/constants.dart';
 
-final viewActiveChallengesProvider = StateProvider<bool>((_) => true);
-
-class ChallengesScreen extends ConsumerWidget {
+class ChallengesScreen extends ConsumerStatefulWidget {
   const ChallengesScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() => _ChallengesScreenState();
+}
+
+class _ChallengesScreenState extends ConsumerState<ChallengesScreen> {
+  bool showActive = true; // active challenges vs historical challenges
+
+  void refreshState(bool newShowActive) {
+    setState(() {
+      showActive = newShowActive;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final List<ChallengesData> activeChallenges = ref.watch(challengesDbProvider).getActiveChallenges();
     final List<ChallengesData> historicalChallenges = ref.watch(challengesDbProvider).getHistoricalChallenges();
-    final bool showActive = ref.watch(viewActiveChallengesProvider);
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -31,7 +41,10 @@ class ChallengesScreen extends ConsumerWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 30, right: 30, top: 10, bottom: 10),
-              child: ChallengesSwitchButton(showActive: showActive),
+              child: ChallengesSwitchButton(
+                showActive: showActive,
+                toggleActive: refreshState,
+              ),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 30, right: 30, top: 10, bottom: 10),

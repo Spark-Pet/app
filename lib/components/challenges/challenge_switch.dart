@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:spark_pet/screens/challenges.dart';
 
-class ChallengesSwitchButton extends ConsumerWidget {
+class ChallengesSwitchButton extends StatelessWidget {
+  final Function toggleActive;
+  final bool showActive;
+
   const ChallengesSwitchButton({
     super.key,
     required this.showActive,
+    required this.toggleActive,
   });
-  final bool showActive;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 16, right: 16),
       child: Stack(
@@ -42,7 +43,7 @@ class ChallengesSwitchButton extends ConsumerWidget {
                           ),
                         ),
                         onPressed: () {
-                          ref.read(viewActiveChallengesProvider.notifier).state = true;
+                          toggleActive(true);
                         },
                       ),
                     ),
@@ -59,7 +60,7 @@ class ChallengesSwitchButton extends ConsumerWidget {
                         ),
                       ),
                       onPressed: () {
-                        ref.read(viewActiveChallengesProvider.notifier).state = false;
+                        toggleActive(false);
                       },
                     ),
                   ],

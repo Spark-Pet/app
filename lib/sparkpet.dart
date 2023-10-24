@@ -10,6 +10,7 @@ import 'package:spark_pet/screens/leaderboard.dart';
 import 'components/spark_pet_nav_bar.dart';
 import 'models/user_data.dart';
 
+
 final StateProvider<int> currentPageProvider = StateProvider<int>((_) => 2);
 final StateProvider<bool> showMainModalProvider = StateProvider<bool>((_) => false);
 final StateProvider<Container> mainModalProvider = StateProvider<Container>((_) => Container());
