@@ -10,9 +10,9 @@ import 'package:spark_pet/screens/leaderboard.dart';
 import 'components/spark_pet_nav_bar.dart';
 import 'models/user_data.dart';
 
-final currentPageProvider = StateProvider<int>((_) => 2);
-final showMainModalProvider = StateProvider<bool>((_) => false);
-final mainModalProvider = StateProvider<Container>((_) => Container());
+final StateProvider<int> currentPageProvider = StateProvider<int>((_) => 2);
+final StateProvider<bool> showMainModalProvider = StateProvider<bool>((_) => false);
+final StateProvider<Container> mainModalProvider = StateProvider<Container>((_) => Container());
 
 
 class SparkPet extends ConsumerWidget {
@@ -20,10 +20,10 @@ class SparkPet extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final loggedIn = ref.watch(currentUserIDProvider);
-    final currentPageIndex = ref.watch(currentPageProvider);
-    final showModal = ref.watch(showMainModalProvider);
-    final modal = ref.watch(mainModalProvider);
+    final String loggedIn = ref.watch(currentUserIDProvider);
+    final int currentPageIndex = ref.watch(currentPageProvider);
+    final bool showModal = ref.watch(showMainModalProvider);
+    final Container modal = ref.watch(mainModalProvider);
 
     return MaterialApp(
       title: 'SparkPet',
@@ -40,10 +40,10 @@ class SparkPet extends ConsumerWidget {
                 const StoreScreen(),
                 const ClosetScreen(),
                 const HomeScreen(),
-                LeaderboardScreen(),
+                const LeaderboardScreen(),
                 const ChallengesScreen(),
               ][currentPageIndex],
-              SparkPetNavBar(),
+              const SparkPetNavBar(),
               if (showModal) Stack(
                 children: [
                   InkWell(
@@ -71,7 +71,7 @@ class SparkPet extends ConsumerWidget {
               ),
             ],
           )
-          : LoginScreen(),
+          : const LoginScreen(),
         ),
       ),
     );

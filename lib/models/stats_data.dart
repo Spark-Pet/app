@@ -69,6 +69,7 @@ class StatsDb {
 
   List<StatsForLeaderboard> getTodaysTopFifty() {
     final PetDb petDb = ref.watch(petDbProvider);
+    final UserDb userDb = ref.watch(userDbProvider);
     final List<StatsForLeaderboard> topFifty = [];
     _stats.sort((a, b) => b.steps[6].compareTo(a.steps[6]));
     for (var i = 0; i < _stats.length && i < 50; i++) {
@@ -88,4 +89,4 @@ class StatsDb {
   }
 }
 
-final statsDbProvider = Provider<StatsDb>((ref) => StatsDb(ref));
+final Provider<StatsDb> statsDbProvider = Provider<StatsDb>((ref) => StatsDb(ref));

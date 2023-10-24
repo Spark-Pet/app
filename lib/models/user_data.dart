@@ -82,6 +82,6 @@ class UserDb {
   }
 }
 
-final userDbProvider = Provider<UserDb>((_) => UserDb());
+final Provider<UserDb> userDbProvider = Provider<UserDb>((_) => UserDb());
 
-final currentUserIDProvider = StateProvider<String>((_) => '');
+final StateProvider<String> currentUserIDProvider = StateProvider<String>((_) => '');

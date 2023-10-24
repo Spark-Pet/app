@@ -1,31 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../components/challenges/challenge_cards.dart';
 import '../components/challenges/challenge_switch.dart';
 import '../models/challenges_data.dart';
 import '../util/constants.dart';
 
-class ChallengesScreen extends StatefulWidget {
+final viewActiveChallengesProvider = StateProvider<bool>((_) => true);
+
+class ChallengesScreen extends ConsumerWidget {
   const ChallengesScreen({super.key});
 
   @override
-  State<ChallengesScreen> createState() => _ChallengesState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final List<ChallengesData> activeChallenges = ref.watch(challengesDbProvider).getActiveChallenges();
+    final List<ChallengesData> historicalChallenges = ref.watch(challengesDbProvider).getHistoricalChallenges();
+    final bool showActive = ref.watch(viewActiveChallengesProvider);
 
-class _ChallengesState extends State<ChallengesScreen> {
-  bool showActive = true; // active challenges vs historical challenges
-
-  final List<ChallengesData> _activeChallenges = challengesDb.getActiveChallenges();
-  final List<ChallengesData> _historicalChallenges = challengesDb.getHistoricalChallenges();
-
-  void refreshState(bool newShowActive) {
-    setState(() {
-      showActive = newShowActive;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -40,16 +31,13 @@ class _ChallengesState extends State<ChallengesScreen> {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 30, right: 30, top: 10, bottom: 10),
-              child: ChallengesSwitchButton(
-                showActive: showActive,
-                toggleSwitch: refreshState,
-              ),
+              child: ChallengesSwitchButton(showActive: showActive),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 30, right: 30, top: 10, bottom: 10),
               child: Column(
                 children: showActive
-                    ? _activeChallenges.map((challenge) => Padding(
+                    ? activeChallenges.map((challenge) => Padding(
                         padding: const EdgeInsets.only(bottom: 10),
                         child: ChallengeCardActive(
                           title: challenge.name,
@@ -59,7 +47,7 @@ class _ChallengesState extends State<ChallengesScreen> {
                           activeDates: '${challenge.startDate.day} - ${challenge.endDate.day} ${Constants.getFullMonth(challenge.startDate.month)} ${challenge.startDate.year}',
                         ),
                       )).toList()
-                    : _historicalChallenges.map((challenge) => Padding(
+                    : historicalChallenges.map((challenge) => Padding(
                         padding: const EdgeInsets.only(bottom: 10),
                         child: ChallengeCardHistorical(
                           title: challenge.name,

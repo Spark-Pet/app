@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../components/closet/closet_item.dart';
 import '../models/accessory_data.dart';
 import '../models/user_data.dart';
 
-class ClosetScreen extends StatefulWidget {
+class ClosetScreen extends ConsumerWidget {
   const ClosetScreen({super.key});
 
   @override
-  State<ClosetScreen> createState() => _ClosetState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final List<String> userAccessoryIds = ref.watch(userDbProvider).getUser(ref.watch(currentUserIDProvider)).purchasedAccessoryIds;
+    final List<AccessoryData> purchasedAccessories = ref.watch(accessoryDbProvider).getAccessoriesById(userAccessoryIds);
 
-class _ClosetState extends State<ClosetScreen> {
-  final List<AccessoryData> _purchasedAccessories = accessoryDb.getAllAccessoriesById(userDb.getUser(currentUserId).purchasedAccessoryIds);
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
@@ -35,7 +32,7 @@ class _ClosetState extends State<ClosetScreen> {
               child: GridView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: _purchasedAccessories.length,
+                itemCount: purchasedAccessories.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   mainAxisSpacing: 10,
@@ -44,7 +41,7 @@ class _ClosetState extends State<ClosetScreen> {
                 ),
                 itemBuilder: (BuildContext context, int index) {
                   return ClosetItem(
-                    accessoryData: _purchasedAccessories[index],
+                    accessoryData: purchasedAccessories[index],
                   );
                 },
               ),

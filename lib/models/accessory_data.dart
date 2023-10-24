@@ -52,7 +52,7 @@ class AccessoryDb {
     return _accessories.firstWhere((data) => data.id == accessoryId);
   }
 
-  List<AccessoryData> getAllAccessoriesById(List<String> accessoryIds) {
+  List<AccessoryData> getAccessoriesById(List<String> accessoryIds) {
     return _accessories.where((data) => accessoryIds.contains(data.id)).toList();
   }
 
@@ -61,4 +61,4 @@ class AccessoryDb {
   }
 }
 
-final accessoryDbProvider = Provider<AccessoryDb>((_) => AccessoryDb());
+final Provider<AccessoryDb> accessoryDbProvider = Provider<AccessoryDb>((_) => AccessoryDb());

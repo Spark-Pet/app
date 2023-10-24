@@ -7,7 +7,7 @@ import '../components/leaderboard/leaderboard_table_text.dart';
 import '../sparkpet.dart';
 
 class LeaderboardScreen extends ConsumerWidget {
-  LeaderboardScreen({super.key});
+  const LeaderboardScreen({super.key});
 
   TableRow clickableTableRow({
     required List<Widget> children,
@@ -26,6 +26,7 @@ class LeaderboardScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final List<StatsForLeaderboard> leaderboard = ref.watch(statsDbProvider).getTodaysTopFifty();
+
     return Scaffold(
       body: Column(
         children: <Widget>[

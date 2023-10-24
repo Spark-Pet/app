@@ -105,4 +105,4 @@ class ChallengesDb {
   }
 }
 
-final challengesDbProvider = Provider<ChallengesDb>((_) => ChallengesDb());
+final Provider<ChallengesDb> challengesDbProvider = Provider<ChallengesDb>((_) => ChallengesDb());

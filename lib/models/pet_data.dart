@@ -65,4 +65,4 @@ class PetDb {
   }
 }
 
-final petDbProvider = Provider<PetDb>((_) => PetDb());
+final Provider<PetDb> petDbProvider = Provider<PetDb>((_) => PetDb());

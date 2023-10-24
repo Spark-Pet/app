@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../components/store/store_item.dart';
 import '../models/accessory_data.dart';
 import '../models/user_data.dart';
 
-class StoreScreen extends StatefulWidget {
+class StoreScreen extends ConsumerWidget {
   const StoreScreen({super.key});
 
   @override
-  State<StoreScreen> createState() => _StoreState();
-}
-
-class _StoreState extends State<StoreScreen> {
-  final List<AccessoryData> _allAccessories = accessoryDb.getAllAccessoriesExcept(userDb.getUser(currentUserId).purchasedAccessoryIds);
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final List<String> userAccessories = ref.watch(userDbProvider).getUser(ref.watch(currentUserIDProvider)).purchasedAccessoryIds;
+    final List<AccessoryData> accessories = ref.watch(accessoryDbProvider).getAllAccessoriesExcept(userAccessories);
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
@@ -35,7 +31,7 @@ class _StoreState extends State<StoreScreen> {
               child: GridView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: _allAccessories.length,
+                itemCount: accessories.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   mainAxisSpacing: 10,
@@ -44,7 +40,7 @@ class _StoreState extends State<StoreScreen> {
                 ),
                 itemBuilder: (BuildContext context, int index) {
                   return StoreItem(
-                    accessoryData: _allAccessories[index],
+                    accessoryData: accessories[index],
                   );
                 },
               ),
