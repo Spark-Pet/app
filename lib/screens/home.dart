@@ -5,8 +5,10 @@ import 'package:spark_pet/components/home/circular_progress.dart';
 import 'package:spark_pet/models/pet_data.dart';
 
 import '../components/home/progress_bar.dart';
+import '../components/home/settings_modal.dart';
 import '../models/stats_data.dart';
 import '../models/user_data.dart';
+import '../sparkpet.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -24,8 +26,15 @@ class HomeScreen extends ConsumerWidget {
           children: [
             const SizedBox(height: 20),
             Row(
-              mainAxisAlignment: MainAxisAlignment.end,
               children: [
+                IconButton(
+                  icon: const Icon(Icons.settings),
+                  onPressed: () {
+                    ref.read(showMainModalProvider.notifier).state = true;
+                    ref.read(mainModalProvider.notifier).state = Container(child: const SettingsModal());
+                  },
+                ),
+                const Spacer(),
                 BoneCountPill(bonesCount: user.bones)
               ]
             ),
