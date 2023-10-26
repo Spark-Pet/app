@@ -72,7 +72,7 @@ class SparkPet extends ConsumerWidget {
               ),
             ],
           )
-          : const LoginScreen(),
+          : LoginScreen(),
         ),
       ),
     );
