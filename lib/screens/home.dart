@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:spark_pet/components/bone_count_pill.dart';
 import 'package:spark_pet/components/home/circular_progress.dart';
-import 'package:spark_pet/icons/bone_icon.dart';
 import 'package:spark_pet/models/pet_data.dart';
 
 import '../components/home/progress_bar.dart';
@@ -26,35 +26,7 @@ class HomeScreen extends ConsumerWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Container(
-                      width: 80,
-                      height: 35,
-                      decoration: BoxDecoration(
-                        color: Colors.grey,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          user.bones.toString(),
-                          style: const TextStyle(
-                            fontSize: 18,
-                            color: Colors.white,
-                          ),
-                        ),
-                        const Icon(
-                          BoneIcon.bone,
-                          size: 20,
-                          color: Colors.white,
-                        ),
-                      ]
-                    )
-                  ]
-                )
+                BoneCountPill(bonesCount: user.bones)
               ]
             ),
             const SizedBox(height: 20),

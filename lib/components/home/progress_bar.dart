@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 class ProgressBar extends StatelessWidget {
   const ProgressBar({
-    Key? key,
+    super.key,
     required this.progressBarColor,
     required this.title,
     required this.currentProgress,
     required this.progressTotal,
-  }) : super(key: key);
+  });
   final Color progressBarColor;
   final String title;
   final int currentProgress;

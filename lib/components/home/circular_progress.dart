@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 class CircularProgress extends StatelessWidget {
   const CircularProgress({
-    Key? key,
+    super.key,
     required this.progressBarColor,
     required this.title,
     required this.currentProgress,
     required this.goal,
     required this.round,
-  }) : super(key: key);
+  });
   final Color progressBarColor;
   final String title;
   final double currentProgress;
