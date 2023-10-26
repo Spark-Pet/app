@@ -10,6 +10,8 @@ class LoginScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    TextEditingController emailController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
     return Scaffold(
       body: Form(
         key: _formKey,
@@ -35,6 +37,7 @@ class LoginScreen extends ConsumerWidget {
                   }
                   return null;
                 },
+                controller: emailController,
                 decoration: const InputDecoration(
                   labelText: 'Email',
                   enabledBorder: UnderlineInputBorder(
@@ -46,8 +49,15 @@ class LoginScreen extends ConsumerWidget {
                   labelStyle: TextStyle(color: Colors.blue),
                 ),
               ),
-              const TextField(
-                decoration: InputDecoration(
+              TextFormField(
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter a password';
+                  }
+                  return null;
+                },
+                controller: passwordController,
+                decoration: const InputDecoration(
                   labelText: 'Password',
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.blue),
@@ -90,10 +100,16 @@ class LoginScreen extends ConsumerWidget {
                 ),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
+                    String userId = ref.watch(userDbProvider).login(emailController.text, passwordController.text);
+                    if (userId.isNotEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Successfully logged in')),
+                      );
+                      ref.read(currentUserIDProvider.notifier).state = userId;
+                    }
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Successfully logged in')),
+                      const SnackBar(content: Text('Invalid email or password')),
                     );
-                    ref.read(currentUserIDProvider.notifier).state = 'user-001';
                   }
                 },
               ),

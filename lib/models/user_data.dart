@@ -5,6 +5,7 @@ class UserData {
     required this.id,
     required this.name,
     required this.email,
+    required this.password,
     required this.username,
     required this.petId,
     required this.statsId,
@@ -19,6 +20,7 @@ class UserData {
   String id;
   String name;
   String email;
+  String password;
   String username;
   String petId;
   String statsId;
@@ -37,6 +39,7 @@ class UserDb {
       name: 'John Doe',
       username: 'jdoe',
       email: 'johndoe@gmail.com',
+      password: 'password',
       petId: 'pet-001',
       statsId: 'stats-001',
       bones: 100,
@@ -50,6 +53,7 @@ class UserDb {
       name: 'Jane Doe',
       username: 'janedoe',
       email: 'janedoe@mail.com',
+      password: 'password',
       petId: 'pet-002',
       statsId: 'stats-002',
       bones: 100,
@@ -63,6 +67,7 @@ class UserDb {
       name: 'John Smith',
       username: 'jsmith',
       email: 'jsmith@gmail.com',
+      password: 'password',
       petId: 'pet-003',
       statsId: 'stats-003',
       bones: 100,
@@ -79,6 +84,15 @@ class UserDb {
 
   List<UserData> getUsers(List<String> userIDs) {
     return _users.where((userData) => userIDs.contains(userData.id)).toList();
+  }
+
+  String login(String email, String password) {
+    try {
+      final user = _users.firstWhere((userData) => userData.email == email && userData.password == password);
+      return user.id;
+    } catch (e) {
+      return '';
+    }
   }
 }
 
