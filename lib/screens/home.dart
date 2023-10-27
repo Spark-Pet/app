@@ -24,9 +24,10 @@ class HomeScreen extends ConsumerWidget {
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            const SizedBox(height: 20),
             Row(
               children: [
+                BoneCountPill(bonesCount: user.bones),
+                const Spacer(),
                 IconButton(
                   icon: const Icon(Icons.settings),
                   onPressed: () {
@@ -34,8 +35,6 @@ class HomeScreen extends ConsumerWidget {
                     ref.read(mainModalProvider.notifier).state = Container(child: const SettingsModal());
                   },
                 ),
-                const Spacer(),
-                BoneCountPill(bonesCount: user.bones)
               ]
             ),
             const SizedBox(height: 20),

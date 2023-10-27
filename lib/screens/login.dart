@@ -106,10 +106,11 @@ class LoginScreen extends ConsumerWidget {
                         const SnackBar(content: Text('Successfully logged in')),
                       );
                       ref.read(currentUserIDProvider.notifier).state = userId;
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Invalid email or password')),
+                      );
                     }
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Invalid email or password')),
-                    );
                   }
                 },
               ),

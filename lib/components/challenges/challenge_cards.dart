@@ -148,12 +148,12 @@ class ChallengeCardHistorical extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String _totalParticipantsShort;
+    String totalParticipantsShort;
 
     if (totalParticipants >= 1000) {
-      _totalParticipantsShort = '${(totalParticipants / 1000).round()}K+';
+      totalParticipantsShort = '${(totalParticipants / 1000).round()}K+';
     } else {
-      _totalParticipantsShort = '$totalParticipants';
+      totalParticipantsShort = '$totalParticipants';
     }
 
     return Column(
@@ -213,9 +213,9 @@ class ChallengeCardHistorical extends StatelessWidget {
                   desc,
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Text(
-                  '$_totalParticipantsShort Total Participants',
+                  '$totalParticipantsShort Total Participants',
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,

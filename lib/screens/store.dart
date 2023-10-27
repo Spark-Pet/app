@@ -20,11 +20,14 @@ class StoreScreen extends ConsumerWidget {
         child: Column(
           children: [
             const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                BoneCountPill(bonesCount: bonesCount)
-              ],
+            Padding(
+              padding: const EdgeInsets.only(right: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  BoneCountPill(bonesCount: bonesCount)
+                ],
+              ),
             ),
             const Text(
               'Store',
