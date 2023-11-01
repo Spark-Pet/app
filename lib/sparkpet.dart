@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:spark_pet/screens/challenges.dart';
-import 'package:spark_pet/screens/closet.dart';
-import 'package:spark_pet/screens/login.dart';
-import 'package:spark_pet/screens/store.dart';
-import 'package:spark_pet/screens/home.dart';
-import 'package:spark_pet/screens/leaderboard.dart';
+import 'package:spark_pet/features/challenges/presentation/challenges.dart';
+import 'package:spark_pet/features/accessory/presentation/closet.dart';
+import 'package:spark_pet/features/authentication/presentation/login.dart';
+import 'package:spark_pet/features/accessory/presentation/store.dart';
+import 'package:spark_pet/features/home/presentation/home.dart';
+import 'package:spark_pet/features/user_statistics/presentation/leaderboard.dart';
 
-import 'components/spark_pet_nav_bar.dart';
-import 'models/user_data.dart';
+import 'features/common/presentation/spark_pet_nav_bar.dart';
+import 'features/user/data/user_providers.dart';
 
 final StateProvider<bool> darkModeProvider = StateProvider<bool>((_) => false);
 final StateProvider<int> currentPageProvider = StateProvider<int>((_) => 2);
