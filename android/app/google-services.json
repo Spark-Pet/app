@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "599726122121",
+    "project_id": "vito-97aa9",
+    "storage_bucket": "vito-97aa9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:599726122121:android:cba485d692d82885f15258",
+        "android_client_info": {
+          "package_name": "com.example.spark_pet"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWXfhPFLHykuIv61vcrzPqjtubY1WT-kE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
