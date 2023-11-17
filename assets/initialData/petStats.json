@@ -1,0 +1,32 @@
+[
+  {
+    "id": "pet-001",
+    "ownerId": "user-001",
+    "name": "Sparky",
+    "hpCurrent": 92,
+    "hpTotal": 100,
+    "currentLevel": 3,
+    "progressNextLevel": 60,
+    "equippedAccessoryIds": ["accessory-001"]
+  },
+  {
+    "id": "pet-002",
+    "ownerId": "user-002",
+    "name": "Fido",
+    "hpCurrent": 80,
+    "hpTotal": 100,
+    "currentLevel": 4,
+    "progressNextLevel": 10,
+    "equippedAccessoryIds": []
+  },
+  {
+    "id": "pet-003",
+    "ownerId": "user-003",
+    "name": "Rover",
+    "hpCurrent": 67,
+    "hpTotal": 100,
+    "currentLevel": 2,
+    "progressNextLevel": 80,
+    "equippedAccessoryIds": []
+  }
+]

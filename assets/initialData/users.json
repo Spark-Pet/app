@@ -1,0 +1,44 @@
+[
+  {
+    "id": "user-001",
+    "name": "John Doe",
+    "username": "jdoe",
+    "email": "johndoe@gmail.com",
+    "password": "password",
+    "petId": "pet-001",
+    "statsId": "stats-001",
+    "bones": 100,
+    "purchasedAccessoryIds": ["accessory-001"],
+    "activeChallengeIds": [],
+    "pastChallengeIds": [],
+    "dateJoined": "2023-10-04"
+  },
+  {
+    "id": "user-002",
+    "name": "Jane Doe",
+    "username": "janedoe",
+    "email": "janedoe@gmail.com",
+    "password": "password",
+    "petId": "pet-002",
+    "statsId": "stats-002",
+    "bones": 100,
+    "purchasedAccessoryIds": [],
+    "activeChallengeIds": [],
+    "pastChallengeIds": [],
+    "dateJoined": "2023-10-04"
+  },
+  {
+    "id": "user-003",
+    "name": "John Smith",
+    "username": "jsmith",
+    "email": "jsmith@gmail.com",
+    "password": "password",
+    "petId": "pet-003",
+    "statsId": "stats-003",
+    "bones": 100,
+    "purchasedAccessoryIds": [],
+    "activeChallengeIds": [],
+    "pastChallengeIds": [],
+    "dateJoined": "2023-10-04"
+  }
+]
