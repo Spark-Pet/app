@@ -1,60 +1,17 @@
-class AccessoryData {
-  AccessoryData({
-    required this.id,
-    required this.name,
-    required this.imagePath,
-    required this.price,
-    required this.type,
-  });
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  String id;
-  String name;
-  String imagePath;
-  int price;
-  String type;
-}
+part 'accessory_data.freezed.dart';
+part 'accessory_data.g.dart';
 
-class AccessoryDb {
-  final List<AccessoryData> _accessories = [
-    AccessoryData(
-      id: 'accessory-001',
-      name: 'Cowboy Hat',
-      imagePath: 'assets/images/accessories/hat-cowboy.png',
-      price: 150,
-      type: 'hat',
-    ),
-    AccessoryData(
-      id: 'accessory-002',
-      name: 'Top Hat',
-      imagePath: 'assets/images/accessories/hat-top.png',
-      price: 300,
-      type: 'hat',
-    ),
-    AccessoryData(
-      id: 'accessory-003',
-      name: 'Puffy Jacket',
-      imagePath: 'assets/images/accessories/jacket-puffy.png',
-      price: 500,
-      type: 'hat',
-    ),
-    AccessoryData(
-      id: 'accessory-004',
-      name: 'Health Potion',
-      imagePath: 'assets/images/accessories/potion.png',
-      price: 1000,
-      type: 'potion',
-    ),
-  ];
+@freezed
+class AccessoryData with _$AccessoryData {
+  const factory AccessoryData({
+    required String id,
+    required String name,
+    required String imagePath,
+    required int price,
+    required String type,
+  }) = _AccessoryData;
 
-  AccessoryData getAccessoryByID(String accessoryId) {
-    return _accessories.firstWhere((data) => data.id == accessoryId);
-  }
-
-  List<AccessoryData> getAccessoriesById(List<String> accessoryIds) {
-    return _accessories.where((data) => accessoryIds.contains(data.id)).toList();
-  }
-
-  List<AccessoryData> getAllAccessoriesExcept(List<String> accessoryIds) {
-    return _accessories.where((data) => !accessoryIds.contains(data.id)).toList();
-  }
+  factory AccessoryData.fromJson(Map<String, dynamic> json) => _$AccessoryDataFromJson(json);
 }
