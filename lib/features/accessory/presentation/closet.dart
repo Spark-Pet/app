@@ -11,8 +11,8 @@ class ClosetScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final List<String> userAccessoryIds = ref.watch(userDbProvider).getUser(ref.watch(currentUserIDProvider)).purchasedAccessoryIds;
-    final List<AccessoryData> purchasedAccessories = ref.watch(accessoryDbProvider).getAccessoriesById(userAccessoryIds);
+    final List<String> userAccessoryIds = ref.watch(userDatabaseProvider).getUser(ref.watch(currentUserIDProvider)).purchasedAccessoryIds;
+    final List<AccessoryData> purchasedAccessories = ref.watch(accessoriesProvider).getAccessoriesById(userAccessoryIds);
 
     return Scaffold(
       resizeToAvoidBottomInset: true,

@@ -28,6 +28,6 @@ class AccessoryDatabase {
       path: FirestorePath.accessoryData(id),
       builder: (data, documentId) => AccessoryData.fromJson(data!));
 
-  Future<void> setUser(AccessoryData accessory) =>
+  Future<void> setAccessory(AccessoryData accessory) =>
       _service.setData(path: FirestorePath.accessoryData(accessory.id), data: accessory.toJson());
 }

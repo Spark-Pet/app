@@ -22,7 +22,7 @@ final accessoryDatabaseProvider =
 );
 
 typedef AccessoryDatabaseRef = AutoDisposeProviderRef<AccessoryDatabase>;
-String _$accessoriesHash() => r'f3b17b28f9d1dc3c75c0d60c31b9f4b5c15d3c8f';
+String _$accessoriesHash() => r'7754df5c728f7685b72144ddee55fe76e2d83172';
 
 /// See also [accessories].
 @ProviderFor(accessories)
