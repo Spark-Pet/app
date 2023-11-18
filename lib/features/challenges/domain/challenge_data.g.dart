@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'challenges_data.dart';
+part of 'challenge_data.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

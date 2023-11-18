@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'challenges_data.dart';
+part of 'challenge_data.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-ChallengesData _$ChallengesDataFromJson(Map<String, dynamic> json) {
+ChallengeData _$ChallengeDataFromJson(Map<String, dynamic> json) {
   return _ChallengesData.fromJson(json);
 }
 
 /// @nodoc
-mixin _$ChallengesData {
+mixin _$ChallengeData {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
@@ -36,15 +36,15 @@ mixin _$ChallengesData {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ChallengesDataCopyWith<ChallengesData> get copyWith =>
+  $ChallengeDataCopyWith<ChallengeData> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ChallengesDataCopyWith<$Res> {
-  factory $ChallengesDataCopyWith(
-          ChallengesData value, $Res Function(ChallengesData) then) =
-      _$ChallengesDataCopyWithImpl<$Res, ChallengesData>;
+abstract class $ChallengeDataCopyWith<$Res> {
+  factory $ChallengeDataCopyWith(
+          ChallengeData value, $Res Function(ChallengeData) then) =
+      _$ChallengeDataCopyWithImpl<$Res, ChallengeData>;
   @useResult
   $Res call(
       {String id,
@@ -63,9 +63,9 @@ abstract class $ChallengesDataCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ChallengesDataCopyWithImpl<$Res, $Val extends ChallengesData>
-    implements $ChallengesDataCopyWith<$Res> {
-  _$ChallengesDataCopyWithImpl(this._value, this._then);
+class _$ChallengeDataCopyWithImpl<$Res, $Val extends ChallengeData>
+    implements $ChallengeDataCopyWith<$Res> {
+  _$ChallengeDataCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -148,7 +148,7 @@ class _$ChallengesDataCopyWithImpl<$Res, $Val extends ChallengesData>
 
 /// @nodoc
 abstract class _$$ChallengesDataImplCopyWith<$Res>
-    implements $ChallengesDataCopyWith<$Res> {
+    implements $ChallengeDataCopyWith<$Res> {
   factory _$$ChallengesDataImplCopyWith(_$ChallengesDataImpl value,
           $Res Function(_$ChallengesDataImpl) then) =
       __$$ChallengesDataImplCopyWithImpl<$Res>;
@@ -172,7 +172,7 @@ abstract class _$$ChallengesDataImplCopyWith<$Res>
 
 /// @nodoc
 class __$$ChallengesDataImplCopyWithImpl<$Res>
-    extends _$ChallengesDataCopyWithImpl<$Res, _$ChallengesDataImpl>
+    extends _$ChallengeDataCopyWithImpl<$Res, _$ChallengesDataImpl>
     implements _$$ChallengesDataImplCopyWith<$Res> {
   __$$ChallengesDataImplCopyWithImpl(
       _$ChallengesDataImpl _value, $Res Function(_$ChallengesDataImpl) _then)
@@ -304,7 +304,7 @@ class _$ChallengesDataImpl implements _ChallengesData {
 
   @override
   String toString() {
-    return 'ChallengesData(id: $id, name: $name, description: $description, startDate: $startDate, endDate: $endDate, costEntry: $costEntry, reward: $reward, requirement: $requirement, totalParticipants: $totalParticipants, successfulParticipants: $successfulParticipants, stepGoal: $stepGoal, stepGoalPercentage: $stepGoalPercentage, streak: $streak)';
+    return 'ChallengeData(id: $id, name: $name, description: $description, startDate: $startDate, endDate: $endDate, costEntry: $costEntry, reward: $reward, requirement: $requirement, totalParticipants: $totalParticipants, successfulParticipants: $successfulParticipants, stepGoal: $stepGoal, stepGoalPercentage: $stepGoalPercentage, streak: $streak)';
   }
 
   @override
@@ -368,7 +368,7 @@ class _$ChallengesDataImpl implements _ChallengesData {
   }
 }
 
-abstract class _ChallengesData implements ChallengesData {
+abstract class _ChallengesData implements ChallengeData {
   const factory _ChallengesData(
       {required final String id,
       required final String name,

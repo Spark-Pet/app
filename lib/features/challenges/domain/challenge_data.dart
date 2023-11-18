@@ -1,11 +1,11 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'challenges_data.freezed.dart';
-part 'challenges_data.g.dart';
+part 'challenge_data.freezed.dart';
+part 'challenge_data.g.dart';
 
 @freezed
-class ChallengesData with _$ChallengesData {
-  const factory ChallengesData({
+class ChallengeData with _$ChallengeData {
+  const factory ChallengeData({
     required String id,
     required String name,
     required String description,
@@ -21,5 +21,5 @@ class ChallengesData with _$ChallengesData {
     int? streak,
   }) = _ChallengesData;
 
-  factory ChallengesData.fromJson(Map<String, dynamic> json) => _$ChallengesDataFromJson(json);
+  factory ChallengeData.fromJson(Map<String, dynamic> json) => _$ChallengeDataFromJson(json);
 }

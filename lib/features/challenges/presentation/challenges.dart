@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'challenge_cards.dart';
 import 'challenge_switch.dart';
 import '../data/challenges_provider.dart';
-import '../domain/challenges_data.dart';
+import '../domain/challenge_data.dart';
 import '../../common/domain/constants.dart';
 
 class ChallengesScreen extends ConsumerStatefulWidget {
@@ -25,8 +25,8 @@ class _ChallengesScreenState extends ConsumerState<ChallengesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final List<ChallengesData> activeChallenges = ref.watch(challengesDbProvider).getActiveChallenges();
-    final List<ChallengesData> historicalChallenges = ref.watch(challengesDbProvider).getHistoricalChallenges();
+    final List<ChallengeData> activeChallenges = ref.watch(challengesDbProvider).getActiveChallenges();
+    final List<ChallengeData> historicalChallenges = ref.watch(challengesDbProvider).getHistoricalChallenges();
 
     return Scaffold(
       body: SingleChildScrollView(
