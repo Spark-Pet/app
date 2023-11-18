@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_pet/features/common/presentation/bone_count_pill.dart';
 
 import '../../user/data/user_providers.dart';
-import '../data/accessory_provider.dart';
+import '../data/accessory_providers.dart';
 import 'store_item.dart';
 import '../domain/accessory_data.dart';
 

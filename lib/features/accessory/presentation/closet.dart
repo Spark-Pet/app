@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../user/data/user_providers.dart';
-import '../data/accessory_provider.dart';
+import '../data/accessory_providers.dart';
 import 'closet_item.dart';
 import '../domain/accessory_data.dart';
 
