@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_pet/features/common/presentation/bone_count_pill.dart';
 
-import '../../user/data/user_providers.dart';
-import '../data/accessory_providers.dart';
+import '../../all_data_provider.dart';
+import '../../user/domain/user_data.dart';
+import '../../vito_error.dart';
+import '../../vito_loading.dart';
 import 'store_item.dart';
 import '../domain/accessory_data.dart';
 
@@ -12,9 +14,31 @@ class StoreScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final int bonesCount = ref.watch(userDbProvider).getUser(ref.watch(currentUserIDProvider)).bones;
-    final List<String> userAccessories = ref.watch(userDbProvider).getUser(ref.watch(currentUserIDProvider)).purchasedAccessoryIds;
-    final List<AccessoryData> accessories = ref.watch(accessoryDbProvider).getAllAccessoriesExcept(userAccessories);
+    final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
+
+    return asyncAllData.when(
+        data: (allData) => _build(
+          context: context,
+          currentUserId: allData.currentUserId,
+          allUserData: allData.userData,
+          allAccessories: allData.accessories,
+          ref: ref,
+        ),
+        loading: () => const VitoLoading(),
+        error: (error, st) => VitoError(error.toString(), st.toString()));
+  }
+
+  Widget _build({
+    required BuildContext context,
+    required String currentUserId,
+    required List<UserData> allUserData,
+    required List<AccessoryData> allAccessories,
+    required WidgetRef ref,
+  }) {
+    final bonesCount = allUserData.firstWhere((user) => user.id == currentUserId).bones;
+    final List<String> userAccessoryIds = allUserData.firstWhere((user) => user.id == currentUserId).purchasedAccessoryIds;
+    final List<AccessoryData> unpurchasedAccessories = allAccessories.where((accessory) => !userAccessoryIds.contains(accessory.id)).toList();
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
@@ -43,7 +67,7 @@ class StoreScreen extends ConsumerWidget {
               child: GridView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: accessories.length,
+                itemCount: unpurchasedAccessories.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   mainAxisSpacing: 10,
@@ -52,7 +76,7 @@ class StoreScreen extends ConsumerWidget {
                 ),
                 itemBuilder: (BuildContext context, int index) {
                   return StoreItem(
-                    accessoryData: accessories[index],
+                    accessoryData: unpurchasedAccessories[index],
                   );
                 },
               ),

@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../accessory/domain/accessory_data.dart';
+import '../../all_data_provider.dart';
+import '../../user/domain/user_data.dart';
+import '../../vito_error.dart';
+import '../../vito_loading.dart';
 import 'challenge_cards.dart';
 import 'challenge_switch.dart';
-import '../data/challenges_provider.dart';
+import '../data/challenge_providers.dart';
 import '../domain/challenge_data.dart';
 import '../../common/domain/constants.dart';
 
@@ -25,8 +30,25 @@ class _ChallengesScreenState extends ConsumerState<ChallengesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final List<ChallengeData> activeChallenges = ref.watch(challengesDbProvider).getActiveChallenges();
-    final List<ChallengeData> historicalChallenges = ref.watch(challengesDbProvider).getHistoricalChallenges();
+    final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
+
+    return asyncAllData.when(
+        data: (allData) => _build(
+          context: context,
+          allChallenges: allData.challenges,
+          ref: ref,
+        ),
+        loading: () => const VitoLoading(),
+        error: (error, st) => VitoError(error.toString(), st.toString()));
+  }
+
+  Widget _build({
+    required BuildContext context,
+    required List<ChallengeData> allChallenges,
+    required WidgetRef ref,
+  }) {
+    final List<ChallengeData> activeChallenges = allChallenges.where((challenge) => challenge.startDate.isBefore(DateTime.now()) && challenge.endDate.isAfter(DateTime.now())).toList();
+    final List<ChallengeData> historicalChallenges = allChallenges.where((challenge) => challenge.endDate.isBefore(DateTime.now())).toList();
 
     return Scaffold(
       body: SingleChildScrollView(

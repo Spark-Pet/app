@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spark_pet/features/common/presentation/bone_count_pill.dart';
 import 'package:spark_pet/features/home/presentation/circular_progress.dart';
-import 'package:spark_pet/features/pet_statistics/domain/pet_stats.dart';
 
-import '../../pet_statistics/data/pet_stats_provider.dart';
-import '../../user/data/user_providers.dart';
+import '../../all_data_provider.dart';
+import '../../pet_statistics/domain/pet_stats.dart';
 import '../../user/domain/user_data.dart';
-import '../../user_statistics/data/user_stats_provider.dart';
+import '../../user_statistics/domain/user_stats.dart';
+import '../../vito_error.dart';
+import '../../vito_loading.dart';
 import 'progress_bar.dart';
 import 'settings_modal.dart';
-import '../../user_statistics/domain/user_stats.dart';
 import '../../../sparkpet.dart';
 
 class HomeScreen extends ConsumerWidget {
@@ -18,9 +18,33 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final UserData user = ref.watch(userDbProvider).getUser(ref.watch(currentUserIDProvider));
-    final PetStats pet = ref.watch(petStatsDbProvider).getPet(user.petId);
-    final UserStats stats = ref.watch(userStatsDbProvider).getStats(user.id);
+    final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
+
+    return asyncAllData.when(
+        data: (allData) => _build(
+          context: context,
+          currentUserId: allData.currentUserId,
+          allUserStats: allData.userStats,
+          allUserData: allData.userData,
+          allPetStats: allData.petStats,
+          ref: ref,
+        ),
+        loading: () => const VitoLoading(),
+        error: (error, st) => VitoError(error.toString(), st.toString()));
+  }
+
+  Widget _build({
+    required BuildContext context,
+    required String currentUserId,
+    required List<UserStats> allUserStats,
+    required List<UserData> allUserData,
+    required List<PetStats> allPetStats,
+    required WidgetRef ref,
+  }) {
+
+    final UserData user = allUserData.firstWhere((user) => user.id == currentUserId);
+    final UserStats userStats = allUserStats.firstWhere((stats) => stats.userId == currentUserId);
+    final PetStats petStats = allPetStats.firstWhere((pet) => pet.id == user.petId);
 
     return Scaffold(
       body: Padding(
@@ -46,16 +70,16 @@ class HomeScreen extends ConsumerWidget {
               children: <Widget> [
                 Expanded(child: ProgressBar(
                   progressBarColor: const Color(0xffe1ab3c),
-                  title: 'Level ${pet.currentLevel}',
-                  currentProgress: pet.progressNextLevel,
+                  title: 'Level ${petStats.currentLevel}',
+                  currentProgress: petStats.progressNextLevel,
                   progressTotal: 100,
                 )),
                 const SizedBox(width: 10),
                 Expanded(child: ProgressBar(
                   progressBarColor: const Color(0xffe82c40),
-                  title: 'HP ${pet.hpCurrent}/${pet.hpTotal}',
-                  currentProgress: pet.hpCurrent,
-                  progressTotal: pet.hpTotal,
+                  title: 'HP ${petStats.hpCurrent}/${petStats.hpTotal}',
+                  currentProgress: petStats.hpCurrent,
+                  progressTotal: petStats.hpTotal,
                 )),
               ],
             ),
@@ -87,8 +111,8 @@ class HomeScreen extends ConsumerWidget {
             CircularProgress(
               progressBarColor: const Color(0xff1d8eec),
               title: "Steps",
-              currentProgress: stats.steps[6].toDouble(),
-              goal: stats.dailyStepsGoal.toDouble(),
+              currentProgress: userStats.steps[6].toDouble(),
+              goal: userStats.dailyStepsGoal.toDouble(),
               round: true,
             ),
             const SizedBox(height: 20),

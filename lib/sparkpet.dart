@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:spark_pet/features/challenges/presentation/challenges.dart';
+import 'package:spark_pet/features/challenge/presentation/challenges.dart';
 import 'package:spark_pet/features/accessory/presentation/closet.dart';
 import 'package:spark_pet/features/authentication/presentation/login.dart';
 import 'package:spark_pet/features/accessory/presentation/store.dart';

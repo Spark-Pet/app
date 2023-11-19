@@ -1,11 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:spark_pet/features/user/domain/user_data.dart';
 import 'package:spark_pet/features/user_statistics/domain/user_stats.dart';
 
+import '../../all_data_provider.dart';
+import '../../pet_statistics/domain/pet_stats.dart';
+import '../../vito_error.dart';
+import '../../vito_loading.dart';
 import 'leaderboard_modal.dart';
 import 'leaderboard_table_text.dart';
 import '../../../sparkpet.dart';
-import '../data/user_stats_provider.dart';
+
+class StatsForLeaderboard {
+  StatsForLeaderboard({
+    required this.place,
+    required this.username,
+    required this.steps,
+    required this.currentStreakDays,
+    required this.currentLevel,
+    required this.joinDate,
+    required this.equippedAccessories,
+  });
+
+  int place;
+  String username;
+  int steps;
+  int currentStreakDays;
+  int currentLevel;
+  String joinDate;
+  List<String> equippedAccessories;
+}
 
 class LeaderboardScreen extends ConsumerWidget {
   const LeaderboardScreen({super.key});
@@ -26,8 +50,42 @@ class LeaderboardScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final List<StatsForLeaderboard> leaderboard = ref.watch(userStatsDbProvider).getTodaysTopFifty();
+    final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
+    return asyncAllData.when(
+      data: (allData) => _build(
+        context: context,
+        currentUserId: allData.currentUserId,
+        allUserStats: allData.userStats,
+        allUserData: allData.userData,
+        allPetStats: allData.petStats,
+        ref: ref,
+      ),
+      loading: () => const VitoLoading(),
+      error: (error, st) => VitoError(error.toString(), st.toString()));
+  }
 
+  Widget _build({
+    required BuildContext context,
+    required String currentUserId,
+    required List<UserStats> allUserStats,
+    required List<UserData> allUserData,
+    required List<PetStats> allPetStats,
+    required WidgetRef ref,
+  }) {
+    // merge allUserStats, allPetStats, and allUserData based on userId
+    final mergedUserStatsData = allUserStats.map((userStats) {
+      final userData = allUserData.firstWhere((userData) => userData.id == userStats.userId);
+      final petStats = allPetStats.firstWhere((petStats) => petStats.id == userData.petId);
+      return StatsForLeaderboard(
+        place: 0, // todo
+        username: userData.username,
+        steps: userStats.steps.reduce((a, b) => a + b),
+        currentStreakDays: userStats.currentStreakDays,
+        currentLevel: petStats.currentLevel,
+        joinDate: userData.dateJoined.toString(),
+        equippedAccessories: petStats.equippedAccessoryIds,
+      );
+    }).toList();
     return Scaffold(
       body: Column(
         children: <Widget>[
@@ -62,7 +120,7 @@ class LeaderboardScreen extends ConsumerWidget {
                     LeaderboardTitleText('Steps'),
                   ],
                 ),
-                ...(leaderboard.map((info) => clickableTableRow(
+                ...(mergedUserStatsData.map((info) => clickableTableRow(
                   children: [
                     LeaderboardRegText(info.place.toString()),
                     LeaderboardRegText(info.username),
