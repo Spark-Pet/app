@@ -4,7 +4,7 @@ class FirestorePath {
   static String allUserData() => 'userData';
 
   static String userStats(String id) => 'userStats/$id';
-  static String allUsersStats() => 'usersStats';
+  static String allUserStats() => 'usersStats';
 
   static String petStats(String id) => 'petStats/$id';
   static String allPetsStats() => 'petsStats';
