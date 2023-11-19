@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../accessory/domain/accessory_data.dart';
 import '../../all_data_provider.dart';
-import '../../user/domain/user_data.dart';
 import '../../vito_error.dart';
 import '../../vito_loading.dart';
 import 'challenge_cards.dart';
 import 'challenge_switch.dart';
-import '../data/challenge_providers.dart';
 import '../domain/challenge_data.dart';
 import '../../common/domain/constants.dart';
 

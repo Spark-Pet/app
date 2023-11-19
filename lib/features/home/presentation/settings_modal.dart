@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../sparkpet_home.dart';
-import '../../user/data/user_providers.dart';
 
 class SettingsModal extends ConsumerWidget {
   const SettingsModal({ super.key });
