@@ -2,10 +2,18 @@ import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../sparkpet_home.dart';
+import '../data/settings_db.dart';
 
 class SettingsModal extends ConsumerWidget {
   const SettingsModal({ super.key });
+
+  void updateThemeMode(ThemeMode? newThemeMode, WidgetRef ref) {
+    if (newThemeMode == null) return;
+    // Do not perform any work if new and old ThemeMode are identical
+    if (newThemeMode == ref.read(currentThemeModeProvider)) return;
+    // Otherwise, store the new ThemeMode in memory
+    ref.read(currentThemeModeProvider.notifier).setThemeMode(newThemeMode);
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -36,7 +44,8 @@ class SettingsModal extends ConsumerWidget {
                     IconButton(
                       icon: const Icon(Icons.close),
                       onPressed: () {
-                        ref.read(showMainModalProvider.notifier).state = false;
+                        print('close settings modal');
+                        // ref.read(showMainModalProvider.notifier).state = false;
                       },
                     ),
                   ],
@@ -51,9 +60,11 @@ class SettingsModal extends ConsumerWidget {
                     ),
                     const Spacer(),
                     Switch(
-                      value: ref.watch(darkModeProvider),
-                      onChanged: (bool value) {
-                        ref.read(darkModeProvider.notifier).state = value;
+                      value: ref.watch(currentThemeModeProvider) == ThemeMode.dark,
+                      onChanged: (bool darkModeOn) {
+                        darkModeOn ?
+                          updateThemeMode(ThemeMode.dark, ref) :
+                          updateThemeMode(ThemeMode.light, ref);
                       },
                     ),
                   ]

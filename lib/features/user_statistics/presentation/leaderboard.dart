@@ -9,7 +9,6 @@ import '../../vito_error.dart';
 import '../../vito_loading.dart';
 import 'leaderboard_modal.dart';
 import 'leaderboard_table_text.dart';
-import '../../../sparkpet_home.dart';
 
 class StatsForLeaderboard {
   StatsForLeaderboard({
@@ -33,6 +32,8 @@ class StatsForLeaderboard {
 
 class LeaderboardScreen extends ConsumerWidget {
   const LeaderboardScreen({super.key});
+
+  static const routeName = '/leaderboard';
 
   TableRow clickableTableRow({
     required List<Widget> children,
@@ -127,6 +128,8 @@ class LeaderboardScreen extends ConsumerWidget {
                     LeaderboardRegText(info.steps.toString()),
                   ],
                   onTap: () {
+                    print('tapped');
+                    /*
                     ref.read(showMainModalProvider.notifier).state = true;
                     ref.read(mainModalProvider.notifier).state = Container(
                       child: LeaderboardModal(
@@ -137,6 +140,8 @@ class LeaderboardScreen extends ConsumerWidget {
                         imageSrc: 'assets/images/dog.png', // todo change based on equipped accessories
                       ),
                     );
+
+                     */
                   },
                 )).toList()),
               ],

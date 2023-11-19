@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:spark_pet/sparkpet_home.dart';
+import 'package:spark_pet/features/accessory/presentation/store.dart';
+import 'package:spark_pet/features/challenge/presentation/challenges.dart';
+import 'package:spark_pet/features/home/presentation/home.dart';
+import 'package:spark_pet/features/user_statistics/presentation/leaderboard.dart';
 
 import '../../../icons/spark_icons.dart';
+import '../../accessory/presentation/closet.dart';
 
-class NavBarButton extends ConsumerWidget {
+class NavBarButton extends StatelessWidget {
   /// A button for the navigation bar (below)
   const NavBarButton({
     super.key,
@@ -12,6 +16,7 @@ class NavBarButton extends ConsumerWidget {
     required this.size,
     required this.currentPageIndex,
     required this.thisPageIndex,
+    required this.thisPageRoute,
     this.topPadding = 0,
     this.bottomPadding = 0,
     this.leftPadding = 0,
@@ -22,6 +27,7 @@ class NavBarButton extends ConsumerWidget {
   final double size;
   final int currentPageIndex;
   final int thisPageIndex;
+  final String thisPageRoute;
 
   final double topPadding;
   final double bottomPadding;
@@ -29,7 +35,7 @@ class NavBarButton extends ConsumerWidget {
   final double rightPadding;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Material(
       color: Colors.transparent,
       child: Ink(
@@ -53,7 +59,7 @@ class NavBarButton extends ConsumerWidget {
             ),
           ),
           onTap: () {
-            ref.read(currentPageProvider.notifier).state = thisPageIndex;
+            Navigator.pushNamed(context, thisPageRoute);
           },
         ),
       ),
@@ -61,13 +67,13 @@ class NavBarButton extends ConsumerWidget {
   }
 }
 
-class SparkPetNavBar extends ConsumerWidget {
+class SparkPetNavBar extends StatelessWidget {
   /// Custom nav bar for app
-  const SparkPetNavBar({super.key});
+  final int currentPageIndex;
+  const SparkPetNavBar({super.key, required this.currentPageIndex});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final currentPageIndex = ref.watch(currentPageProvider);
+  Widget build(BuildContext context) {
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [
@@ -96,12 +102,14 @@ class SparkPetNavBar extends ConsumerWidget {
                       size: 28,
                       currentPageIndex: currentPageIndex,
                       thisPageIndex: 0,
+                      thisPageRoute: StoreScreen.routeName,
                     ),
                     NavBarButton(
                       icon: SparkIcons.hanger,
                       size: 30,
                       currentPageIndex: currentPageIndex,
                       thisPageIndex: 1,
+                      thisPageRoute: ClosetScreen.routeName,
                       bottomPadding: 3,
                     ),
                     const SizedBox(
@@ -112,12 +120,14 @@ class SparkPetNavBar extends ConsumerWidget {
                       size: 24,
                       currentPageIndex: currentPageIndex,
                       thisPageIndex: 3,
+                      thisPageRoute: LeaderboardScreen.routeName,
                     ),
                     NavBarButton(
                       icon: SparkIcons.goals,
                       size: 28,
                       currentPageIndex: currentPageIndex,
                       thisPageIndex: 4,
+                      thisPageRoute: ChallengesScreen.routeName,
                     ),
                   ],
                 ),
@@ -150,7 +160,7 @@ class SparkPetNavBar extends ConsumerWidget {
                   ),
                 ),
                 onTap: () {
-                  ref.read(currentPageProvider.notifier).state = 2;
+                  Navigator.pushNamed(context, HomeScreen.routeName);
                 },
               ),
             ),

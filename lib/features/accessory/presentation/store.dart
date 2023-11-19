@@ -12,6 +12,8 @@ import '../domain/accessory_data.dart';
 class StoreScreen extends ConsumerWidget {
   const StoreScreen({super.key});
 
+  static const routeName = '/store';
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
