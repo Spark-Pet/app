@@ -264,8 +264,8 @@ class _$ChallengesDataImpl implements _ChallengesData {
       required this.costEntry,
       required this.reward,
       required this.requirement,
-      required this.totalParticipants = 0,
-      required this.successfulParticipants = 0,
+      this.totalParticipants = 0,
+      this.successfulParticipants = 0,
       this.stepGoal,
       this.stepGoalPercentage,
       this.streak});
@@ -378,8 +378,8 @@ abstract class _ChallengesData implements ChallengeData {
       required final int costEntry,
       required final int reward,
       required final int requirement,
-      required final int totalParticipants,
-      required final int successfulParticipants,
+      final int totalParticipants,
+      final int successfulParticipants,
       final int? stepGoal,
       final double? stepGoalPercentage,
       final int? streak}) = _$ChallengesDataImpl;
