@@ -11,7 +11,7 @@ import '../../vito_error.dart';
 import '../../vito_loading.dart';
 import 'progress_bar.dart';
 import 'settings_modal.dart';
-import '../../../sparkpet.dart';
+import '../../../sparkpet_home.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});

@@ -9,7 +9,7 @@ import '../../vito_error.dart';
 import '../../vito_loading.dart';
 import 'leaderboard_modal.dart';
 import 'leaderboard_table_text.dart';
-import '../../../sparkpet.dart';
+import '../../../sparkpet_home.dart';
 
 class StatsForLeaderboard {
   StatsForLeaderboard({

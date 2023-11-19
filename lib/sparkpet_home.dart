@@ -7,23 +7,47 @@ import 'package:spark_pet/features/accessory/presentation/store.dart';
 import 'package:spark_pet/features/home/presentation/home.dart';
 import 'package:spark_pet/features/user_statistics/presentation/leaderboard.dart';
 
+import 'features/all_data_provider.dart';
 import 'features/common/presentation/spark_pet_nav_bar.dart';
-import 'features/user/data/user_providers.dart';
+import 'features/vito_error.dart';
+import 'features/vito_loading.dart';
 
 final StateProvider<bool> darkModeProvider = StateProvider<bool>((_) => false);
 final StateProvider<int> currentPageProvider = StateProvider<int>((_) => 2);
 final StateProvider<bool> showMainModalProvider = StateProvider<bool>((_) => false);
 final StateProvider<Container> mainModalProvider = StateProvider<Container>((_) => Container());
 
-class SparkPet extends ConsumerWidget {
-  const SparkPet({super.key});
+class SparkPetHome extends ConsumerWidget {
+  const SparkPetHome({super.key});
+
+  static const routeName = '/';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final String loggedIn = ref.watch(currentUserIDProvider);
+    final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
+
+    return asyncAllData.when(
+        data: (allData) => _build(
+          context: context,
+          currentUserId: allData.currentUserId,
+          ref: ref,
+        ),
+        loading: () => const VitoLoading(),
+        error: (error, st) => VitoError(error.toString(), st.toString()));
+  }
+
+  Widget _build({
+    required BuildContext context,
+    required String currentUserId,
+    required WidgetRef ref,
+  }) {
     final int currentPageIndex = ref.watch(currentPageProvider);
     final bool showModal = ref.watch(showMainModalProvider);
     final Container modal = ref.watch(mainModalProvider);
+
+    if (currentUserId.isEmpty) {
+      return const LoginScreen();
+    }
 
     return MaterialApp(
       title: 'SparkPet',
@@ -33,7 +57,7 @@ class SparkPet extends ConsumerWidget {
       ),
       home: Scaffold(
         body: SafeArea(
-          child: loggedIn.isNotEmpty ? Stack(
+          child: Stack(
             alignment: Alignment.bottomCenter,
             children: [
               <Widget>[
@@ -70,8 +94,7 @@ class SparkPet extends ConsumerWidget {
                 ],
               ),
             ],
-          )
-          : LoginScreen(),
+          ),
         ),
       ),
     );

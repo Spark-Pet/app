@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart' hide EmailAuthProvider;
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:spark_pet/sparkpet.dart';
+import 'package:spark_pet/sparkpet_home.dart';
 
 import 'firebase_options.dart';
 
@@ -50,6 +50,6 @@ class SparkPetApp extends StatelessWidget {
         ),
       );
     }
-    return const SparkPet();
+    return const SparkPetHome();
   }
 }

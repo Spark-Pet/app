@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:spark_pet/sparkpet.dart';
+import 'package:spark_pet/sparkpet_home.dart';
 
 import '../../../icons/spark_icons.dart';
 
