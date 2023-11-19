@@ -47,7 +47,6 @@ class SparkPetApp extends ConsumerWidget {
   // Root of application
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    print('uhhhh');
     return MaterialApp(
       title: 'SparkPet',
       theme: ThemeData(

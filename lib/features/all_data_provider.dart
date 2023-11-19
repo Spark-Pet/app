@@ -20,7 +20,7 @@ class AllData {
     required this.petStats,
     required this.userStats,
     required this.userData,
-    required this.currentUserId,
+    required this.currentUserEmail,
   });
 
   final List<AccessoryData> accessories;
@@ -28,7 +28,7 @@ class AllData {
   final List<PetStats> petStats;
   final List<UserStats> userStats;
   final List<UserData> userData;
-  final String currentUserId;
+  final String currentUserEmail;
 }
 
 @riverpod
@@ -38,12 +38,12 @@ Future<AllData> allData(AllDataRef ref) async {
   final petStats = ref.watch(petStatsProvider.future);
   final userStats = ref.watch(userStatsProvider.future);
   final userData = ref.watch(usersProvider.future);
-  final currentUserId = ref.watch(currentUserIdProvider);
+  final currentUserEmail = ref.watch(currentUserEmailProvider);
   return AllData(
       accessories: await accessories,
       challenges: await challenges,
       petStats: await petStats,
       userStats: await userStats,
       userData: await userData,
-      currentUserId: currentUserId);
+      currentUserEmail: currentUserEmail);
 }

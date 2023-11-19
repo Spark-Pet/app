@@ -21,7 +21,7 @@ class StoreScreen extends ConsumerWidget {
     return asyncAllData.when(
         data: (allData) => _build(
           context: context,
-          currentUserId: allData.currentUserId,
+          currentUserEmail: allData.currentUserEmail,
           allUserData: allData.userData,
           allAccessories: allData.accessories,
           ref: ref,
@@ -32,13 +32,13 @@ class StoreScreen extends ConsumerWidget {
 
   Widget _build({
     required BuildContext context,
-    required String currentUserId,
+    required String currentUserEmail,
     required List<UserData> allUserData,
     required List<AccessoryData> allAccessories,
     required WidgetRef ref,
   }) {
-    final bonesCount = allUserData.firstWhere((user) => user.id == currentUserId).bones;
-    final List<String> userAccessoryIds = allUserData.firstWhere((user) => user.id == currentUserId).purchasedAccessoryIds;
+    final bonesCount = allUserData.firstWhere((user) => user.email == currentUserEmail).bones;
+    final List<String> userAccessoryIds = allUserData.firstWhere((user) => user.email == currentUserEmail).purchasedAccessoryIds;
     final List<AccessoryData> unpurchasedAccessories = allAccessories.where((accessory) => !userAccessoryIds.contains(accessory.id)).toList();
 
     return Scaffold(

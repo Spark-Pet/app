@@ -55,7 +55,7 @@ class LeaderboardScreen extends ConsumerWidget {
     return asyncAllData.when(
       data: (allData) => _build(
         context: context,
-        currentUserId: allData.currentUserId,
+        currentUserEmail: allData.currentUserEmail,
         allUserStats: allData.userStats,
         allUserData: allData.userData,
         allPetStats: allData.petStats,
@@ -67,7 +67,7 @@ class LeaderboardScreen extends ConsumerWidget {
 
   Widget _build({
     required BuildContext context,
-    required String currentUserId,
+    required String currentUserEmail,
     required List<UserStats> allUserStats,
     required List<UserData> allUserData,
     required List<PetStats> allPetStats,
