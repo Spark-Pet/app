@@ -15,8 +15,6 @@ import 'progress_bar.dart';
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
-  static const routeName = '/home';
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
@@ -141,7 +139,6 @@ class HomeScreen extends ConsumerWidget {
               )
             ),
             const SizedBox(height: 90),
-            const SparkPetNavBar(currentPageIndex: 2),
           ],
         ),
       ),

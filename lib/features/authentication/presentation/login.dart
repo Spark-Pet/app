@@ -1,9 +1,8 @@
 import 'package:firebase_ui_auth/firebase_ui_auth.dart' hide ForgotPasswordView;
 import 'package:flutter/material.dart';
 import 'package:spark_pet/features/authentication/presentation/verify_email_view.dart';
-import 'package:spark_pet/features/home/presentation/home.dart';
+import 'package:spark_pet/features/main_screen.dart';
 
-import 'decorations.dart';
 import 'forgot_password_view.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -26,21 +25,21 @@ class LoginScreen extends StatelessWidget {
           if (!state.user!.emailVerified) {
             Navigator.pushNamed(context, VerifyEmailView.routeName);
           } else {
-            Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+            Navigator.pushReplacementNamed(context, MainScreen.routeName);
           }
         }),
         AuthStateChangeAction<UserCreated>((context, state) {
           if (!state.credential.user!.emailVerified) {
             Navigator.pushNamed(context, VerifyEmailView.routeName);
           } else {
-            Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+            Navigator.pushReplacementNamed(context, MainScreen.routeName);
           }
         }),
         AuthStateChangeAction<CredentialLinked>((context, state) {
           if (!state.user.emailVerified) {
             Navigator.pushNamed(context, VerifyEmailView.routeName);
           } else {
-            Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+            Navigator.pushReplacementNamed(context, MainScreen.routeName);
           }
         }),
       ],
