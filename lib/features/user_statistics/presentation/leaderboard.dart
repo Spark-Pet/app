@@ -34,8 +34,6 @@ class StatsForLeaderboard {
 class LeaderboardScreen extends ConsumerWidget {
   const LeaderboardScreen({super.key});
 
-  static const routeName = '/leaderboard';
-
   TableRow clickableTableRow({
     required List<Widget> children,
     required void Function() onTap,

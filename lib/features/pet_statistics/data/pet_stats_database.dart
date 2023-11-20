@@ -4,7 +4,6 @@ import '../../../repositories/firestore/firestore_path.dart';
 import '../../../repositories/firestore/firestore_service.dart';
 import '../domain/pet_stats.dart';
 
-// Provides access to the Firestore database storing User documents.
 class PetStatsDatabase {
   PetStatsDatabase(this.ref);
 

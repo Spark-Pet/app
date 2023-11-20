@@ -23,11 +23,12 @@ mixin _$ChallengeData {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
+  @TimestampSerializer()
   DateTime get startDate => throw _privateConstructorUsedError;
+  @TimestampSerializer()
   DateTime get endDate => throw _privateConstructorUsedError;
   int get costEntry => throw _privateConstructorUsedError;
   int get reward => throw _privateConstructorUsedError;
-  int get requirement => throw _privateConstructorUsedError;
   int get totalParticipants => throw _privateConstructorUsedError;
   int get successfulParticipants => throw _privateConstructorUsedError;
   int? get stepGoal => throw _privateConstructorUsedError;
@@ -50,11 +51,10 @@ abstract class $ChallengeDataCopyWith<$Res> {
       {String id,
       String name,
       String description,
-      DateTime startDate,
-      DateTime endDate,
+      @TimestampSerializer() DateTime startDate,
+      @TimestampSerializer() DateTime endDate,
       int costEntry,
       int reward,
-      int requirement,
       int totalParticipants,
       int successfulParticipants,
       int? stepGoal,
@@ -82,7 +82,6 @@ class _$ChallengeDataCopyWithImpl<$Res, $Val extends ChallengeData>
     Object? endDate = null,
     Object? costEntry = null,
     Object? reward = null,
-    Object? requirement = null,
     Object? totalParticipants = null,
     Object? successfulParticipants = null,
     Object? stepGoal = freezed,
@@ -117,10 +116,6 @@ class _$ChallengeDataCopyWithImpl<$Res, $Val extends ChallengeData>
       reward: null == reward
           ? _value.reward
           : reward // ignore: cast_nullable_to_non_nullable
-              as int,
-      requirement: null == requirement
-          ? _value.requirement
-          : requirement // ignore: cast_nullable_to_non_nullable
               as int,
       totalParticipants: null == totalParticipants
           ? _value.totalParticipants
@@ -158,11 +153,10 @@ abstract class _$$ChallengesDataImplCopyWith<$Res>
       {String id,
       String name,
       String description,
-      DateTime startDate,
-      DateTime endDate,
+      @TimestampSerializer() DateTime startDate,
+      @TimestampSerializer() DateTime endDate,
       int costEntry,
       int reward,
-      int requirement,
       int totalParticipants,
       int successfulParticipants,
       int? stepGoal,
@@ -188,7 +182,6 @@ class __$$ChallengesDataImplCopyWithImpl<$Res>
     Object? endDate = null,
     Object? costEntry = null,
     Object? reward = null,
-    Object? requirement = null,
     Object? totalParticipants = null,
     Object? successfulParticipants = null,
     Object? stepGoal = freezed,
@@ -224,10 +217,6 @@ class __$$ChallengesDataImplCopyWithImpl<$Res>
           ? _value.reward
           : reward // ignore: cast_nullable_to_non_nullable
               as int,
-      requirement: null == requirement
-          ? _value.requirement
-          : requirement // ignore: cast_nullable_to_non_nullable
-              as int,
       totalParticipants: null == totalParticipants
           ? _value.totalParticipants
           : totalParticipants // ignore: cast_nullable_to_non_nullable
@@ -259,11 +248,10 @@ class _$ChallengesDataImpl implements _ChallengesData {
       {required this.id,
       required this.name,
       required this.description,
-      required this.startDate,
-      required this.endDate,
+      @TimestampSerializer() required this.startDate,
+      @TimestampSerializer() required this.endDate,
       required this.costEntry,
       required this.reward,
-      required this.requirement,
       this.totalParticipants = 0,
       this.successfulParticipants = 0,
       this.stepGoal,
@@ -280,15 +268,15 @@ class _$ChallengesDataImpl implements _ChallengesData {
   @override
   final String description;
   @override
+  @TimestampSerializer()
   final DateTime startDate;
   @override
+  @TimestampSerializer()
   final DateTime endDate;
   @override
   final int costEntry;
   @override
   final int reward;
-  @override
-  final int requirement;
   @override
   @JsonKey()
   final int totalParticipants;
@@ -304,7 +292,7 @@ class _$ChallengesDataImpl implements _ChallengesData {
 
   @override
   String toString() {
-    return 'ChallengeData(id: $id, name: $name, description: $description, startDate: $startDate, endDate: $endDate, costEntry: $costEntry, reward: $reward, requirement: $requirement, totalParticipants: $totalParticipants, successfulParticipants: $successfulParticipants, stepGoal: $stepGoal, stepGoalPercentage: $stepGoalPercentage, streak: $streak)';
+    return 'ChallengeData(id: $id, name: $name, description: $description, startDate: $startDate, endDate: $endDate, costEntry: $costEntry, reward: $reward, totalParticipants: $totalParticipants, successfulParticipants: $successfulParticipants, stepGoal: $stepGoal, stepGoalPercentage: $stepGoalPercentage, streak: $streak)';
   }
 
   @override
@@ -322,8 +310,6 @@ class _$ChallengesDataImpl implements _ChallengesData {
             (identical(other.costEntry, costEntry) ||
                 other.costEntry == costEntry) &&
             (identical(other.reward, reward) || other.reward == reward) &&
-            (identical(other.requirement, requirement) ||
-                other.requirement == requirement) &&
             (identical(other.totalParticipants, totalParticipants) ||
                 other.totalParticipants == totalParticipants) &&
             (identical(other.successfulParticipants, successfulParticipants) ||
@@ -346,7 +332,6 @@ class _$ChallengesDataImpl implements _ChallengesData {
       endDate,
       costEntry,
       reward,
-      requirement,
       totalParticipants,
       successfulParticipants,
       stepGoal,
@@ -373,11 +358,10 @@ abstract class _ChallengesData implements ChallengeData {
       {required final String id,
       required final String name,
       required final String description,
-      required final DateTime startDate,
-      required final DateTime endDate,
+      @TimestampSerializer() required final DateTime startDate,
+      @TimestampSerializer() required final DateTime endDate,
       required final int costEntry,
       required final int reward,
-      required final int requirement,
       final int totalParticipants,
       final int successfulParticipants,
       final int? stepGoal,
@@ -394,15 +378,15 @@ abstract class _ChallengesData implements ChallengeData {
   @override
   String get description;
   @override
+  @TimestampSerializer()
   DateTime get startDate;
   @override
+  @TimestampSerializer()
   DateTime get endDate;
   @override
   int get costEntry;
   @override
   int get reward;
-  @override
-  int get requirement;
   @override
   int get totalParticipants;
   @override

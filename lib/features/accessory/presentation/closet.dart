@@ -11,8 +11,6 @@ import '../domain/accessory_data.dart';
 class ClosetScreen extends ConsumerWidget {
   const ClosetScreen({super.key});
 
-  static const routeName = '/closet';
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);

@@ -23,7 +23,6 @@ mixin _$UserData {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
-  String get password => throw _privateConstructorUsedError;
   String get username => throw _privateConstructorUsedError;
   String get petId => throw _privateConstructorUsedError;
   String get statsId => throw _privateConstructorUsedError;
@@ -49,7 +48,6 @@ abstract class $UserDataCopyWith<$Res> {
       {String id,
       String name,
       String email,
-      String password,
       String username,
       String petId,
       String statsId,
@@ -77,7 +75,6 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
     Object? id = null,
     Object? name = null,
     Object? email = null,
-    Object? password = null,
     Object? username = null,
     Object? petId = null,
     Object? statsId = null,
@@ -100,10 +97,6 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      password: null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
               as String,
       username: null == username
           ? _value.username
@@ -157,7 +150,6 @@ abstract class _$$UserDataImplCopyWith<$Res>
       {String id,
       String name,
       String email,
-      String password,
       String username,
       String petId,
       String statsId,
@@ -183,7 +175,6 @@ class __$$UserDataImplCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
     Object? email = null,
-    Object? password = null,
     Object? username = null,
     Object? petId = null,
     Object? statsId = null,
@@ -206,10 +197,6 @@ class __$$UserDataImplCopyWithImpl<$Res>
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      password: null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
               as String,
       username: null == username
           ? _value.username
@@ -258,7 +245,6 @@ class _$UserDataImpl implements _UserData {
       {required this.id,
       required this.name,
       required this.email,
-      required this.password,
       required this.username,
       required this.petId,
       required this.statsId,
@@ -281,8 +267,6 @@ class _$UserDataImpl implements _UserData {
   final String name;
   @override
   final String email;
-  @override
-  final String password;
   @override
   final String username;
   @override
@@ -325,7 +309,7 @@ class _$UserDataImpl implements _UserData {
 
   @override
   String toString() {
-    return 'UserData(id: $id, name: $name, email: $email, password: $password, username: $username, petId: $petId, statsId: $statsId, bones: $bones, purchasedAccessoryIds: $purchasedAccessoryIds, activeChallengeIds: $activeChallengeIds, pastChallengeIds: $pastChallengeIds, dateJoined: $dateJoined, imagePath: $imagePath)';
+    return 'UserData(id: $id, name: $name, email: $email, username: $username, petId: $petId, statsId: $statsId, bones: $bones, purchasedAccessoryIds: $purchasedAccessoryIds, activeChallengeIds: $activeChallengeIds, pastChallengeIds: $pastChallengeIds, dateJoined: $dateJoined, imagePath: $imagePath)';
   }
 
   @override
@@ -336,8 +320,6 @@ class _$UserDataImpl implements _UserData {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.email, email) || other.email == email) &&
-            (identical(other.password, password) ||
-                other.password == password) &&
             (identical(other.username, username) ||
                 other.username == username) &&
             (identical(other.petId, petId) || other.petId == petId) &&
@@ -362,7 +344,6 @@ class _$UserDataImpl implements _UserData {
       id,
       name,
       email,
-      password,
       username,
       petId,
       statsId,
@@ -392,7 +373,6 @@ abstract class _UserData implements UserData {
       {required final String id,
       required final String name,
       required final String email,
-      required final String password,
       required final String username,
       required final String petId,
       required final String statsId,
@@ -412,8 +392,6 @@ abstract class _UserData implements UserData {
   String get name;
   @override
   String get email;
-  @override
-  String get password;
   @override
   String get username;
   @override

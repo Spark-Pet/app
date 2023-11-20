@@ -4,7 +4,6 @@ import '../../../repositories/firestore/firestore_path.dart';
 import '../../../repositories/firestore/firestore_service.dart';
 import '../domain/challenge_data.dart';
 
-// Provides access to the Firestore database storing User documents.
 class ChallengeDatabase {
   ChallengeDatabase(this.ref);
 

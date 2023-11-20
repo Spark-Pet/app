@@ -12,7 +12,6 @@ class UserData with _$UserData {
     required String id,
     required String name,
     required String email,
-    required String password,
     required String username,
     required String petId,
     required String statsId,

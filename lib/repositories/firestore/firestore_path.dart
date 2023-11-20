@@ -9,9 +9,9 @@ class FirestorePath {
   static String petStats(String id) => 'petStats/$id';
   static String allPetsStats() => 'petStats';
 
-  static String accessoryData(String id) => 'accessoryData/$id';
-  static String allAccessoryData() => 'accessoryData';
+  static String accessoryData(String id) => 'accessory/$id';
+  static String allAccessoryData() => 'accessory';
 
-  static String challengeData(String id) => 'challengeData/$id';
-  static String allChallengeData() => 'challengeData';
+  static String challengeData(String id) => 'challenge/$id';
+  static String allChallengeData() => 'challenge';
 }

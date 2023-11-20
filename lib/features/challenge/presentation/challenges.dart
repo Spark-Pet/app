@@ -12,8 +12,6 @@ import '../../common/domain/constants.dart';
 class ChallengesScreen extends ConsumerStatefulWidget {
   const ChallengesScreen({super.key});
 
-  static const routeName = '/challenges';
-
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _ChallengesScreenState();
 }

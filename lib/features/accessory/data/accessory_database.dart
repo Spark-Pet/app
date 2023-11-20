@@ -4,7 +4,6 @@ import '../../../repositories/firestore/firestore_path.dart';
 import '../../../repositories/firestore/firestore_service.dart';
 import '../domain/accessory_data.dart';
 
-// Provides access to the Firestore database storing User documents.
 class AccessoryDatabase {
   AccessoryDatabase(this.ref);
 
