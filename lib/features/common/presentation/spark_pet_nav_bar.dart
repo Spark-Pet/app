@@ -8,6 +8,7 @@ import 'package:spark_pet/features/user_statistics/presentation/leaderboard.dart
 import '../../../icons/spark_icons.dart';
 import '../../accessory/presentation/closet.dart';
 import '../../main_screen.dart';
+import '../../settings/data/settings_db.dart';
 
 class NavBarButton extends ConsumerWidget {
   /// A button for the navigation bar (below)
@@ -39,7 +40,7 @@ class NavBarButton extends ConsumerWidget {
       child: Ink(
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: (currentPageIndex == thisPageIndex) ? Colors.blue[300] : Colors.transparent,
+          color: currentPageIndex == thisPageIndex ? Colors.blue[300] : Colors.transparent,
         ),
         child: InkWell(
           customBorder: const CircleBorder(),
@@ -53,7 +54,8 @@ class NavBarButton extends ConsumerWidget {
             child: Icon(
               icon,
               size: size,
-              color: Colors.black,
+              color: ref.watch(currentThemeModeProvider) == ThemeMode.dark ?
+                  (currentPageIndex == thisPageIndex ? Colors.white : Colors.grey[500]) : Colors.black,
             ),
           ),
           onTap: () {
@@ -78,9 +80,10 @@ class SparkPetNavBar extends ConsumerWidget {
         SizedBox(
           height: 66,
           child: Container(
-            decoration: const BoxDecoration(
-              color: Color(0xffe9e9e9),
-              borderRadius: BorderRadius.only(
+            decoration: BoxDecoration(
+              color: ref.watch(currentThemeModeProvider) == ThemeMode.dark ?
+                  Colors.grey[900] : Colors.grey[300],
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(30),
                 topRight: Radius.circular(30),
               ),
@@ -136,7 +139,7 @@ class SparkPetNavBar extends ConsumerWidget {
             child: Ink(
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: (currentPageIndex == 2) ? Colors.blue[300] : Colors.black,
+                color: (currentPageIndex == 2) ? Colors.blue[300] : const Color(0xff030303),
               ),
               child: InkWell(
                 customBorder: const CircleBorder(),

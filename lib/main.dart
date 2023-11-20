@@ -44,11 +44,7 @@ class SparkPetApp extends ConsumerWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      darkTheme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue)
-            .copyWith(secondary: Colors.blueAccent, brightness: Brightness.dark),
-        useMaterial3: true,
-      ),
+      darkTheme: ThemeData.dark(),
       themeMode: ref.watch(currentThemeModeProvider),
       onGenerateRoute: (RouteSettings routeSettings) {
         return MaterialPageRoute<void>(

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LeaderboardModal extends StatelessWidget {
+import '../../settings/data/settings_db.dart';
+
+class LeaderboardModal extends ConsumerWidget {
   const LeaderboardModal({
     super.key,
     required this.username,
@@ -17,12 +20,13 @@ class LeaderboardModal extends StatelessWidget {
   final String imageSrc;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
         height: 270,
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(20)),
+        decoration: BoxDecoration(
+          color: ref.watch(currentThemeModeProvider) == ThemeMode.dark ?
+              const Color(0xFF333333) : Colors.white,
+          borderRadius: const BorderRadius.all(Radius.circular(20)),
         ),
         child: Padding(
           padding: const EdgeInsets.only(

@@ -1,17 +1,18 @@
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:spark_pet/features/authentication/presentation/login.dart';
 
+import '../../main_screen.dart';
 import '../data/settings_db.dart';
 
 class SettingsModal extends ConsumerWidget {
   const SettingsModal({ super.key });
 
   void updateThemeMode(ThemeMode? newThemeMode, WidgetRef ref) {
-    if (newThemeMode == null) return;
-    // Do not perform any work if new and old ThemeMode are identical
-    if (newThemeMode == ref.read(currentThemeModeProvider)) return;
-    // Otherwise, store the new ThemeMode in memory
+    if (newThemeMode == null || newThemeMode == ref.read(currentThemeModeProvider)) {
+      return;
+    }
     ref.read(currentThemeModeProvider.notifier).setThemeMode(newThemeMode);
   }
 
@@ -21,9 +22,10 @@ class SettingsModal extends ConsumerWidget {
       padding: const EdgeInsets.symmetric(horizontal: 40),
       child: Container(
           height: 200,
-          decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(20)),
+          decoration: BoxDecoration(
+            color: ref.watch(currentThemeModeProvider) == ThemeMode.dark ?
+              const Color(0xFF333333) : Colors.white,
+            borderRadius: const BorderRadius.all(Radius.circular(20)),
           ),
           child: Padding(
             padding: const EdgeInsets.only(
@@ -44,8 +46,7 @@ class SettingsModal extends ConsumerWidget {
                     IconButton(
                       icon: const Icon(Icons.close),
                       onPressed: () {
-                        print('close settings modal');
-                        // ref.read(showMainModalProvider.notifier).state = false;
+                        ref.read(showMainModalProvider.notifier).state = false;
                       },
                     ),
                   ],
@@ -82,7 +83,8 @@ class SettingsModal extends ConsumerWidget {
                       icon: const Icon(Icons.logout),
                       onPressed: () {
                         FirebaseUIAuth.signOut();
-                        // todo set current user id to null?
+                        ref.read(showMainModalProvider.notifier).state = false;
+                        Navigator.pushReplacementNamed(context, LoginScreen.routeName);
                       },
                     ),
                   ],
