@@ -4,6 +4,7 @@ import 'package:spark_pet/features/user/domain/user_data.dart';
 import 'package:spark_pet/features/user_statistics/domain/user_stats.dart';
 
 import '../../all_data_provider.dart';
+import '../../main_screen.dart';
 import '../../pet_statistics/domain/pet_stats.dart';
 import '../../vito_error.dart';
 import '../../vito_loading.dart';
@@ -128,8 +129,6 @@ class LeaderboardScreen extends ConsumerWidget {
                     LeaderboardRegText(info.steps.toString()),
                   ],
                   onTap: () {
-                    print('tapped');
-                    /*
                     ref.read(showMainModalProvider.notifier).state = true;
                     ref.read(mainModalProvider.notifier).state = Container(
                       child: LeaderboardModal(
@@ -140,8 +139,6 @@ class LeaderboardScreen extends ConsumerWidget {
                         imageSrc: 'assets/images/dog.png', // todo change based on equipped accessories
                       ),
                     );
-
-                     */
                   },
                 )).toList()),
               ],

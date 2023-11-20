@@ -5,7 +5,9 @@ import 'package:spark_pet/features/home/presentation/circular_progress.dart';
 
 import '../../all_data_provider.dart';
 import '../../common/presentation/spark_pet_nav_bar.dart';
+import '../../main_screen.dart';
 import '../../pet_statistics/domain/pet_stats.dart';
+import '../../settings/presentation/settings_modal.dart';
 import '../../user/domain/user_data.dart';
 import '../../user_statistics/domain/user_stats.dart';
 import '../../vito_error.dart';
@@ -59,9 +61,8 @@ class HomeScreen extends ConsumerWidget {
                 IconButton(
                   icon: const Icon(Icons.settings),
                   onPressed: () {
-                    //ref.read(showMainModalProvider.notifier).state = true;
-                    //ref.read(mainModalProvider.notifier).state = Container(child: const SettingsModal());
-                    print('settings pressed');
+                    ref.read(showMainModalProvider.notifier).state = true;
+                    ref.read(mainModalProvider.notifier).state = Container(child: const SettingsModal());
                   },
                 ),
               ]
