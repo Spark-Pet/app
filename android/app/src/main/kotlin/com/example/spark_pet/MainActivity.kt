@@ -1,4 +1,4 @@
-package com.example.spark_pet
+package com.spark_pet
 
 import io.flutter.embedding.android.FlutterActivity
 
