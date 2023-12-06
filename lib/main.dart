@@ -6,6 +6,7 @@ import 'package:spark_pet/features/authentication/presentation/login.dart';
 import 'package:spark_pet/features/main_screen.dart';
 import 'package:spark_pet/features/page_not_found.dart';
 import 'package:spark_pet/features/user/domain/user_data.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import 'features/authentication/presentation/forgot_password_view.dart';
 import 'features/authentication/presentation/verify_email_view.dart';
@@ -29,6 +30,10 @@ Future<void> main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   FirebaseUIAuth.configureProviders([EmailAuthProvider()]);
   await verifyInitialData();
+  var status = await Permission.activityRecognition.status;
+  if (!status.isGranted) {
+    await Permission.activityRecognition.request();
+  }
   runApp(const ProviderScope(child: SparkPetApp()));
 }
 

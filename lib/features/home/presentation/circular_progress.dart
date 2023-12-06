@@ -11,7 +11,7 @@ class CircularProgress extends StatelessWidget {
   });
   final Color progressBarColor;
   final String title;
-  final double currentProgress;
+  final int currentProgress;
   final double goal;
   final bool round; // whether or not to round the display
 

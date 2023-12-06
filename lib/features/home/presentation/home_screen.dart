@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pedometer/pedometer.dart';
 import 'package:spark_pet/features/common/presentation/bone_count_pill.dart';
 import 'package:spark_pet/features/home/presentation/circular_progress.dart';
 
 import '../../all_data_provider.dart';
-import '../../common/presentation/spark_pet_nav_bar.dart';
 import '../../main_screen.dart';
 import '../../pet_statistics/domain/pet_stats.dart';
 import '../../settings/presentation/settings_modal.dart';
@@ -14,11 +14,68 @@ import '../../vito_error.dart';
 import '../../vito_loading.dart';
 import 'progress_bar.dart';
 
-class HomeScreen extends ConsumerWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends ConsumerState<HomeScreen> {
+  late Stream<StepCount> _stepCountStream;
+  late Stream<PedestrianStatus> _pedestrianStatusStream;
+  String _status = '?';
+  int _steps = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    initPlatformState();
+  }
+
+  void onStepCount(StepCount event) {
+    print(event);
+    setState(() {
+      _steps = event.steps;
+    });
+  }
+
+  void onPedestrianStatusChanged(PedestrianStatus event) {
+    print(event);
+    setState(() {
+      _status = event.status;
+    });
+  }
+
+  void onPedestrianStatusError(error) {
+    print('onPedestrianStatusError: $error');
+    setState(() {
+      _status = 'Pedestrian Status not available';
+    });
+    print(_status);
+  }
+
+  void onStepCountError(error) {
+    print('onStepCountError: $error');
+    setState(() {
+      _steps = 0;
+    });
+  }
+
+  void initPlatformState() {
+    _pedestrianStatusStream = Pedometer.pedestrianStatusStream;
+    _pedestrianStatusStream
+        .listen(onPedestrianStatusChanged)
+        .onError(onPedestrianStatusError);
+
+    _stepCountStream = Pedometer.stepCountStream;
+    _stepCountStream.listen(onStepCount).onError(onStepCountError);
+
+    if (!mounted) return;
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final AsyncValue<AllData> asyncAllData = ref.watch(allDataProvider);
 
     return asyncAllData.when(
@@ -114,9 +171,15 @@ class HomeScreen extends ConsumerWidget {
             CircularProgress(
               progressBarColor: const Color(0xff1d8eec),
               title: "Steps",
-              currentProgress: userStats.steps[6].toDouble(),
+              currentProgress: _steps,
               goal: userStats.dailyStepsGoal.toDouble(),
               round: true,
+            ),
+            Text(
+              _status,
+              style: _status == 'walking' || _status == 'stopped'
+                  ? TextStyle(fontSize: 30)
+                  : TextStyle(fontSize: 20, color: Colors.red),
             ),
             const SizedBox(height: 20),
             TextButton(
