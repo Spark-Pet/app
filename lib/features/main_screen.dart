@@ -19,7 +19,7 @@ final StateProvider<Container> mainModalProvider = StateProvider<Container>((_) 
 class MainScreen extends ConsumerWidget {
   const MainScreen({super.key});
 
-  static const routeName = '/main';
+  static const routeName = '/';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

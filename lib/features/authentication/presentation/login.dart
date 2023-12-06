@@ -8,11 +8,12 @@ import 'forgot_password_view.dart';
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
-  static const routeName = '/';
+  static const routeName = '/login';
 
   @override
   Widget build(BuildContext context) {
     return SignInScreen(
+      providers: [EmailAuthProvider()],
       actions: [
         ForgotPasswordAction((context, email) {
           Navigator.pushNamed(

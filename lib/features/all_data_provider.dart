@@ -45,5 +45,6 @@ Future<AllData> allData(AllDataRef ref) async {
       petStats: await petStats,
       userStats: await userStats,
       userData: await userData,
-      currentUserEmail: currentUserEmail);
+      currentUserEmail: currentUserEmail
+  );
 }
