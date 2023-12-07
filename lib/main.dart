@@ -38,7 +38,18 @@ class SparkPetApp extends ConsumerWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      darkTheme: ThemeData.dark(),
+      darkTheme: ThemeData(
+        useMaterial3: true,
+        scaffoldBackgroundColor: const Color(0xFF333333),
+        primaryColor: Colors.white,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        textTheme: const TextTheme(
+          bodyLarge: TextStyle(color: Colors.white),
+          bodyMedium: TextStyle(color: Colors.white),
+          bodySmall: TextStyle(color: Colors.white),
+        ),
+        iconTheme: const IconThemeData(color: Colors.white),
+      ),
       themeMode: ref.watch(currentThemeModeProvider),
       initialRoute: LoginScreen.routeName,
       onGenerateRoute: (RouteSettings routeSettings) {

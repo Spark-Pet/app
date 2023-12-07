@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
+import 'package:collection/collection.dart';
 import 'package:spark_pet/features/user/domain/user_data.dart';
 import 'package:spark_pet/features/user_statistics/domain/user_stats.dart';
 
@@ -13,7 +15,6 @@ import 'leaderboard_table_text.dart';
 
 class StatsForLeaderboard {
   StatsForLeaderboard({
-    required this.place,
     required this.username,
     required this.steps,
     required this.currentStreakDays,
@@ -22,7 +23,6 @@ class StatsForLeaderboard {
     required this.equippedAccessories,
   });
 
-  int place;
   String username;
   int steps;
   int currentStreakDays;
@@ -77,7 +77,6 @@ class LeaderboardScreen extends ConsumerWidget {
       final userData = allUserData.firstWhere((userData) => userData.id == userStats.userId);
       final petStats = allPetStats.firstWhere((petStats) => petStats.id == userData.petId);
       return StatsForLeaderboard(
-        place: 0, // todo
         username: userData.username,
         steps: userStats.steps.reduce((a, b) => a + b),
         currentStreakDays: userStats.currentStreakDays,
@@ -86,6 +85,8 @@ class LeaderboardScreen extends ConsumerWidget {
         equippedAccessories: petStats.equippedAccessoryIds,
       );
     }).toList();
+    final DateTime today = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
+
     return Scaffold(
       body: Column(
         children: <Widget>[
@@ -97,8 +98,8 @@ class LeaderboardScreen extends ConsumerWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          const Text(
-            'Thursday, Oct 5th'
+          Text(
+            DateFormat('EEEE, MMMM d, y').format(today),
           ),
           Padding(
             padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
@@ -106,12 +107,8 @@ class LeaderboardScreen extends ConsumerWidget {
               columnWidths: const {
                 0: FlexColumnWidth(1),
                 1: FlexColumnWidth(4),
-                2: FlexColumnWidth(4),
+                2: FlexColumnWidth(3),
               },
-              border: TableBorder.all(
-                color: Colors.grey,
-                width: 1,
-              ),
               children: [
                 const TableRow(
                   children: [
@@ -120,11 +117,11 @@ class LeaderboardScreen extends ConsumerWidget {
                     LeaderboardTitleText('Steps'),
                   ],
                 ),
-                ...(mergedUserStatsData.map((info) => clickableTableRow(
+                ...(mergedUserStatsData.mapIndexed((place, info) => clickableTableRow(
                   children: [
-                    LeaderboardRegText(info.place.toString()),
+                    LeaderboardTitleText((place + 1).toString()),
                     LeaderboardRegText(info.username),
-                    LeaderboardRegText(info.steps.toString()),
+                    LeaderboardRegText(NumberFormat('#,##,000').format(info.steps)),
                   ],
                   onTap: () {
                     ref.read(showMainModalProvider.notifier).state = true;

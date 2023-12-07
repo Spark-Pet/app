@@ -15,9 +15,10 @@ class StoreItem extends StatelessWidget {
         Expanded(
           child: Container(
             decoration: BoxDecoration(
+              color: const Color(0xFF454545),
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
-                  color: Colors.black,
+                  color: const Color(0xFF222222),
                   width: 2
               ),
             ),
@@ -25,7 +26,7 @@ class StoreItem extends StatelessWidget {
               children: [
                 const Spacer(),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Image(
                     image: AssetImage(accessoryData.imagePath),
                     fit: BoxFit.contain,

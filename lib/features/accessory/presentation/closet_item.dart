@@ -14,9 +14,10 @@ class ClosetItem extends StatelessWidget {
         Expanded(
           child: Container(
             decoration: BoxDecoration(
+              color: const Color(0xFF454545),
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
-                  color: Colors.black,
+                  color: const Color(0xFF222222),
                   width: 2
               ),
             ),
@@ -24,7 +25,7 @@ class ClosetItem extends StatelessWidget {
               children: [
                 const Spacer(),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Image(
                     image: AssetImage(accessoryData.imagePath),
                     fit: BoxFit.contain,
@@ -38,7 +39,7 @@ class ClosetItem extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 5),
+                const SizedBox(height: 6),
               ],
             ),
           ),

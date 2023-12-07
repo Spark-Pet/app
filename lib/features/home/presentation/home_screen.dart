@@ -23,7 +23,6 @@ class HomeScreen extends ConsumerStatefulWidget {
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   late Stream<StepCount> _stepCountStream;
-  late Stream<PedestrianStatus> _pedestrianStatusStream;
   int _steps = 0;
 
   @override
@@ -122,31 +121,17 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 )),
               ],
             ),
-            const SizedBox(height: 6),
+            const SizedBox(height: 20),
             const Expanded(
-              child: Stack(
-                alignment: Alignment.bottomCenter,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 50),
-                    child: Image(
-                      image: AssetImage('assets/images/dog.png'),
-                      width: 180,
-                      height: 180
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 20),
-                    child: Image(
-                        image: AssetImage('assets/images/dish.png'),
-                        width: 100,
-                        height: 100
-                    ),
-                  ),
-                ],
+              child: Padding(
+                padding: EdgeInsets.only(bottom: 20),
+                child: Image(
+                  image: AssetImage('assets/images/dog.png'),
+                  width: 450,
+                  height: 450
+                ),
               ),
             ),
-            const SizedBox(height: 16),
             CircularProgress(
               progressBarColor: const Color(0xff1d8eec),
               title: "Steps",

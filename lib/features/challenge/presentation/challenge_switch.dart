@@ -21,7 +21,7 @@ class ChallengesSwitchButton extends StatelessWidget {
             child: Container(
               height: 42,
               decoration: BoxDecoration(
-                color: Colors.grey[200],
+                color: const Color(0xFF222222),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Center(

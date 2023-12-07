@@ -24,9 +24,9 @@ class ChallengeCardActive extends StatelessWidget {
       children: [
         Container(
           width: double.infinity,
-          decoration: BoxDecoration(
-            color: Colors.grey[700],
-            borderRadius: const BorderRadius.only(
+          decoration: const BoxDecoration(
+            color: Color(0xFF282828),
+            borderRadius: BorderRadius.only(
               topLeft: Radius.circular(20),
               topRight: Radius.circular(20),
             ),
@@ -46,9 +46,9 @@ class ChallengeCardActive extends StatelessWidget {
           ),
         ),
         Container(
-          decoration: BoxDecoration(
-            color: Colors.grey[200],
-            borderRadius: const BorderRadius.only(
+          decoration: const BoxDecoration(
+            color: Color(0xFF3C3C3C),
+            borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(20),
               bottomRight: Radius.circular(20),
             ),
@@ -160,9 +160,9 @@ class ChallengeCardHistorical extends StatelessWidget {
       children: [
         Container(
           width: double.infinity,
-          decoration: BoxDecoration(
-            color: Colors.grey[700],
-            borderRadius: const BorderRadius.only(
+          decoration: const BoxDecoration(
+            color: Color(0xFF282828),
+            borderRadius: BorderRadius.only(
               topLeft: Radius.circular(20),
               topRight: Radius.circular(20),
             ),
@@ -182,9 +182,9 @@ class ChallengeCardHistorical extends StatelessWidget {
           ),
         ),
         Container(
-          decoration: BoxDecoration(
-            color: Colors.grey[200],
-            borderRadius: const BorderRadius.only(
+          decoration: const BoxDecoration(
+            color: Color(0xFF3C3C3C),
+            borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(20),
               bottomRight: Radius.circular(20),
             ),

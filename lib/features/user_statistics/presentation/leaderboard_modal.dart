@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 
 import '../../settings/data/settings_db.dart';
 
@@ -42,7 +43,7 @@ class LeaderboardModal extends ConsumerWidget {
                 ),
               ),
               Text(
-                'Member since $joinDate',
+                'Member since ${DateFormat('yMd').format(DateTime.parse(joinDate))}',
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
