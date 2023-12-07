@@ -24,7 +24,6 @@ class HomeScreen extends ConsumerStatefulWidget {
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   late Stream<StepCount> _stepCountStream;
   late Stream<PedestrianStatus> _pedestrianStatusStream;
-  String _status = '?';
   int _steps = 0;
 
   @override
@@ -40,21 +39,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     });
   }
 
-  void onPedestrianStatusChanged(PedestrianStatus event) {
-    print(event);
-    setState(() {
-      _status = event.status;
-    });
-  }
-
-  void onPedestrianStatusError(error) {
-    print('onPedestrianStatusError: $error');
-    setState(() {
-      _status = 'Pedestrian Status not available';
-    });
-    print(_status);
-  }
-
   void onStepCountError(error) {
     print('onStepCountError: $error');
     setState(() {
@@ -63,11 +47,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   void initPlatformState() {
-    _pedestrianStatusStream = Pedometer.pedestrianStatusStream;
-    _pedestrianStatusStream
-        .listen(onPedestrianStatusChanged)
-        .onError(onPedestrianStatusError);
-
     _stepCountStream = Pedometer.stepCountStream;
     _stepCountStream.listen(onStepCount).onError(onStepCountError);
 
@@ -174,12 +153,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               currentProgress: _steps,
               goal: userStats.dailyStepsGoal.toDouble(),
               round: true,
-            ),
-            Text(
-              _status,
-              style: _status == 'walking' || _status == 'stopped'
-                  ? TextStyle(fontSize: 30)
-                  : TextStyle(fontSize: 20, color: Colors.red),
             ),
             const SizedBox(height: 20),
             TextButton(

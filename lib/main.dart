@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart' hide EmailAuthProvider;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart' hide ForgotPasswordView;
 import 'package:flutter/material.dart';
@@ -7,7 +6,6 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:spark_pet/features/authentication/presentation/login.dart';
 import 'package:spark_pet/features/main_screen.dart';
 import 'package:spark_pet/features/page_not_found.dart';
-import 'package:spark_pet/features/vito_loading.dart';
 
 import 'features/authentication/presentation/forgot_password_view.dart';
 import 'features/authentication/presentation/verify_email_view.dart';
@@ -29,48 +27,11 @@ Future<void> main() async {
   runApp(const ProviderScope(child: SparkPetApp()));
 }
 
-class SparkPetApp extends ConsumerStatefulWidget {
+class SparkPetApp extends ConsumerWidget {
   const SparkPetApp({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _SparkPetAppState();
-}
-
-class _SparkPetAppState extends ConsumerState<SparkPetApp> {
-  int loginStatus = -1; // -1: not loaded, 0: not logged in, 1: logged in
-
-  @override
-  Widget build(BuildContext context) {
-    FirebaseAuth.instance
-        .authStateChanges()
-        .listen((User? user) {
-      if (user != null && loginStatus != 1) {
-        print("User is signed in");
-        setState(() { loginStatus = 1; });
-      } else if (user == null && loginStatus != 0){
-        print("User is signed out");
-        setState(() { loginStatus = 0; });
-      }
-    });
-
-    if (loginStatus == -1) {
-      return const MaterialApp(
-        title: 'SparkPet',
-        home: Scaffold(
-          body: Center(
-            child: VitoLoading(),
-          ),
-        ),
-      );
-    }
-
-    if (loginStatus == 0) {
-      return const MaterialApp(
-        title: 'SparkPet',
-        home: LoginScreen(),
-      );
-    }
-
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       title: 'SparkPet',
       theme: ThemeData(
@@ -79,7 +40,7 @@ class _SparkPetAppState extends ConsumerState<SparkPetApp> {
       ),
       darkTheme: ThemeData.dark(),
       themeMode: ref.watch(currentThemeModeProvider),
-      initialRoute: loginStatus == 1 ? MainScreen.routeName : LoginScreen.routeName,
+      initialRoute: LoginScreen.routeName,
       onGenerateRoute: (RouteSettings routeSettings) {
         return MaterialPageRoute<void>(
           settings: routeSettings,
