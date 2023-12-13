@@ -73,7 +73,7 @@ class LeaderboardScreen extends ConsumerWidget {
     required WidgetRef ref,
   }) {
     // merge allUserStats, allPetStats, and allUserData based on userId
-    final mergedUserStatsData = allUserStats.map((userStats) {
+    var mergedUserStatsData = allUserStats.map((userStats) {
       final userData = allUserData.firstWhere((userData) => userData.id == userStats.userId);
       final petStats = allPetStats.firstWhere((petStats) => petStats.id == userData.petId);
       return StatsForLeaderboard(
@@ -85,6 +85,7 @@ class LeaderboardScreen extends ConsumerWidget {
         equippedAccessories: petStats.equippedAccessoryIds,
       );
     }).toList();
+    mergedUserStatsData.sort((a, b) => b.steps - a.steps);
     final DateTime today = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
 
     return Scaffold(
